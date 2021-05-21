@@ -1,0 +1,33 @@
+import React, { Component } from "react";
+import { Col, Row } from "reactstrap";
+import ShirtCard from "../../../../../../components/ShirtCard/ShirtCard";
+import "./SimilarProduct.scss";
+
+export default class SimilarProducts extends Component {
+    render() {
+        const shirts =this.props;
+        console.log("shirts",shirts);
+        return (
+            <div className="similar-products">
+                <h3>Sản phẩm tương tự</h3>
+                <Row>
+                    {/* <div className="item">
+                        <Grid container spacing={3}>
+                            {shirts.shirts.map((item) => (
+                                <Grid item xs={3} key={item._id}>
+                                    <ShirtCard type="newTab" shirt={item}/>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div> */}
+                    
+                    {shirts.shirts.map((item) => (
+                        <Col xs={3} key={item._id}>
+                            <ShirtCard type="newTab" shirt={item}/>
+                        </Col>
+                    ))}
+                </Row>
+            </div>
+        );
+    }
+}
