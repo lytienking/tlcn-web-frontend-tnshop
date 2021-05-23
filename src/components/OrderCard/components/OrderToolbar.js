@@ -60,7 +60,7 @@ class OrderToolBar extends Component{
                             />
                             <Divider />
                             <CardContent>
-                                <RatingForm/>
+                                <RatingForm idProduct ={this.props.productID} idOrder ={this.props.orderID} />
                             </CardContent>
                             <Divider />
                             <CardActions
@@ -93,6 +93,7 @@ class OrderToolBar extends Component{
     render(){
         const { classes, className, ...rest } = this.props;
         const { openModal } = this.state;
+        console.log("propsOrder",this.props);
         return (
             <div {...rest} className={clsx(classes.root, className)}>
                 <div className={classes.row}>

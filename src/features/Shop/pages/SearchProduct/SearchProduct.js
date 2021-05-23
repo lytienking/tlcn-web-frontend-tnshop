@@ -8,10 +8,7 @@ import shirtsApi from "../../../../api/shirtsApi";
 import {getShirts} from "../../../../actions/shirts";
 const SearchProduct = (props) => {
     const [page, setPage] = useState(1);
-    const [category, setCategory] = useState("");
-    const [price,setPrice]=useState("");
     const [parentId,setParentId]=useState("");
-    const [productByParentId,setProductByParentId]=useState({});
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -24,7 +21,7 @@ const SearchProduct = (props) => {
                 const result ={
                     docs:response,
                     total:response.length,
-                    limit:response.length,
+                    limit:8,
                     page:1,
                     pages:1
                 };

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Formik, Form, FastField } from "formik";
-import RatingProduct from '../../../RatingProduct/RatingProduct';
-import * as Yup from "yup";
 import { Grid } from "@material-ui/core";
 import {Snackbar,Button} from "@material-ui/core";
 import {connect} from "react-redux";
+import Rating from '@material-ui/lab/Rating';
 import Alert from "@material-ui/lab/Alert";
-import InputField from "../../../custom-field/InputField/index";
+import userApi from "../../../../api/userApi";
+import "./RatingForm.scss"
 
 class RatingForm extends Component {
     constructor(props){
@@ -15,87 +14,109 @@ class RatingForm extends Component {
             openAlert:false,
             content:"Loading...",
             type: "info",
-        };
-        this.initialValues = {
-            star:"",
+            star:2.5,
             contentRating:""
         };
-        this.validationSchema = Yup.object().shape({
-            star:Yup.string().required("Vui lòng không để trống."),
-            contentRating:Yup.string().required("Vui lòng không để trống."),
-        });
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.receiveStar =this.receiveStar.bind(this);
+        this.receiveContentRating =this.receiveContentRating.bind(this);
     }
-    handleSubmit(values){
+    handleSubmit(){
         this.setState({openAlert:true});
-        let formData = new FormData();
-        formData.set("star",values.star);
-        formData.set("contentRating",values.contentRating);
-        
+        (async () => {
+            try {
+                let body = {
+                    content:this.state.contentRating,
+                    author: "demo",
+                    rating: this.state.star,
+                    productID:this.props.idProduct,
+                    orderID:this.props.idOrder
+                };
+                const response = await userApi.commentProduct(body);
+                console.log(response)
+                if (response.success) {
+                    this.setState({
+                        openAlert: true,
+                        content:
+                            "Phản hồi thành công. Cảm ơn bạn đã mua sản phẩm.",
+                        type: "success",
+                    });
+                }
+            } catch (error) {
+                console.log(`failed post register as ${error}`);
+            }
+        })();
     }
-
+    receiveStar(event, newValue) {
+        this.setState({
+            star: newValue,
+        });
+    }
+    receiveContentRating(event) {
+        this.setState({
+            contentRating: event.target.value,
+        });
+    }
     render(){
+        console.log("porp",this.props);
         return (
-            <Formik 
-                initialValues={this.initialValues}
-                alidationSchema={this.validationSchema}
-                onSubmit={this.handleSubmit}
-            >
-                {(formikProps) =>{
-                    return (
-                        <Form>
-                            <Grid container spacing={3}>
-                                <Grid item md={12} xs={12}>
-                                    <h3>Đánh giá sao *</h3>
-                                    <RatingProduct/>
-                                </Grid>
-                                <Grid item md={12} xs={12} >
-                                    <FastField
-                                        category="multiple"
-                                        name="contentRating"
-                                        component={InputField}
-                                        label="Ý kiến của bạn *"
-                                        row={9}
-                                    />
-                                </Grid>
-                                <Grid
-                                    item
-                                    md={12}
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "flex-end",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <Button
-                                        color="primary"
-                                        type="submit"
-                                        variant="contained"
-                                    >
-                                        Xác nhận
-                                    </Button>
-                                </Grid>
-                                <Snackbar
-                                    open={this.state.openAlert}
-                                    autoHideDuration={6000}
-                                    onClose={() => {
-                                        this.setState({ openAlert: false });
-                                    }}
-                                >
-                                    <Alert
-                                        onClose={() => {
-                                            this.setState({ openAlert: false });
-                                        }}
-                                        severity="warning"
-                                    >
-                                        {this.state.content}
-                                    </Alert>
-                                </Snackbar>
-                            </Grid>
-                        </Form>
-                    )
-                }}
-            </Formik>
+            <div className="add-comment">
+                <Grid container spacing={3}>
+                    <Grid item md={12} xs={12}>
+                        <h3>Đánh giá sao *</h3>
+                            <Rating 
+                            name="half-rating" 
+                            value={this.state.star} 
+                            onChange={this.receiveStar} 
+                            />
+                        
+                    </Grid>
+                    <Grid item md={12} xs={12} >
+                        <div className="input">
+                            <input
+                                value={this.state.contentRating}
+                                type="text"
+                                onChange={this.receiveContentRating}
+                                placeholder="Đăng lên nhận xét của bạn ..."
+                            />
+                        </div>
+                    </Grid>
+                    <Grid
+                        item
+                        md={12}
+                        style={{
+                            display: "flex",
+                            justifyContent: "flex-end",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Button
+                            color="primary"
+                            type="submit"
+                            variant="contained"
+                            onClick={this.handleSubmit}
+                        >
+                            Xác nhận
+                        </Button>
+                    </Grid>
+                    <Snackbar
+                        open={this.state.openAlert}
+                        autoHideDuration={6000}
+                        onClose={() => {
+                            this.setState({ openAlert: false });
+                        }}
+                    >
+                        <Alert
+                            onClose={() => {
+                                this.setState({ openAlert: false });
+                            }}
+                            severity="success"
+                        >
+                            {this.state.content}
+                        </Alert>
+                    </Snackbar>
+                </Grid>
+            </div>
         )
     }
 }

@@ -44,10 +44,10 @@ function groupByOrderStatus(id){
     return msg;
 }
 function showRating(props){
-  if(props.orderDetail.orderDetail.status === 3 && getGroupId()==1){
+  if(props.orderDetail.orderDetail.status === 3 && getGroupId()==1 && props.orderDetail.orderDetail.statusRating===0){
     return (
       <div>
-        <OrderToolBar/>
+        <OrderToolBar productID = {props.order.productID._id} orderID ={props.orderDetail.orderDetail._id} />
       </div>
     )
   }else {
@@ -60,7 +60,7 @@ function showRating(props){
 }
 export default function OrderCard(props) {
   const classes = useStyles();
-  console.log("id",getGroupId());
+  console.log("props",props);
   
   return (
     <div className={classes.root}>

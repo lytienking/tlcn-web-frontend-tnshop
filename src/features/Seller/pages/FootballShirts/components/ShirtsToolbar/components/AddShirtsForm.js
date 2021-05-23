@@ -109,7 +109,7 @@ class AddShirtsForm extends Component {
         parentcategories.forEach((parentcategory) =>{
             parentcategoriesRender.push({value:parentcategory._id,name:parentcategory.name});
         });
-        console.log(this.initialValues);
+        console.log("initial",this.initialValues);
         return (
             <Formik 
                 initialValues={this.initialValues}
