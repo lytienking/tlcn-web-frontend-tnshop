@@ -18,7 +18,7 @@ export default class PayCard extends Component {
         super(props);
         this.state = {
             quantity: 1,
-            size:""
+            size:"Chọn Size"
         };
         this.handleAdd = this.handleAdd.bind(this);
         this.handleSub = this.handleSub.bind(this);
@@ -32,8 +32,8 @@ export default class PayCard extends Component {
     handleAdd() {
         this.setState((state, props) => ({
             quantity:
-                state.quantity + 1 > props.availableQuantity
-                    ? props.availableQuantity
+                state.quantity + 1 > props.shirt.quantity-props.shirt.quantitysold
+                    ? props.shirt.quantity-props.shirt.quantitysold
                     : state.quantity + 1,
         }));
     }

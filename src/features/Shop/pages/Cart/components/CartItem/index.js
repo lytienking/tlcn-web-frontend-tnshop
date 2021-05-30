@@ -15,7 +15,7 @@ function CartItem(props) {
         setQuantityTemp(temp);
     };
     const handleAdd = () => {
-        let limit = props.cartItem.productID.quantity;
+        let limit = props.cartItem.productID.quantity-props.cartItem.productID.quantitysold;
 
         let temp = quantityTemp + 1 > limit ? limit : quantityTemp + 1;
         setQuantityTemp(temp);

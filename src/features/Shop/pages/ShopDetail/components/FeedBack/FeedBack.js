@@ -11,19 +11,19 @@ function FeedBack(props) {
     const countArr =[0,0,0,0,0];
     props.commentsProduct.forEach(element => {
         arrRating.push(element.rating);
-        if(element.rating===0){
+        if(element.rating===1){
             countArr[0]++;
         }
-        if(element.rating===1){
+        if(element.rating===2){
             countArr[1]++;
         }
-        if(element.rating===2){
+        if(element.rating===3){
             countArr[2]++;
         }
-        if(element.rating===3){
+        if(element.rating===4){
             countArr[3]++;
         }
-        if(element.rating===4){
+        if(element.rating===5){
             countArr[4]++;
         }
     });
@@ -34,7 +34,10 @@ function FeedBack(props) {
             <Row>
                 <Col xs={6}>
                     <div>
-                        <span style={{fontSize:"48px"}}>{Math.round((sum/arrRating.length)*10)/10}</span>
+                        {arrRating.length > 0 
+                        ? <span style={{fontSize:"48px"}}>{Math.round((sum/arrRating.length)*10)/10}</span>
+                        : <span style={{fontSize:"48px"}}>0</span>
+                        }
                         <span style={{fontSize:"32px",color:"#9e9e9e"}}>/5</span>
                     </div>
                     <Rating name="half-rating-read" value={sum/arrRating.length} size="large" precision={0.5} readOnly />
@@ -44,23 +47,23 @@ function FeedBack(props) {
                     <ul>
                         <li>
                             <Rating name="half-rating-read" value={1} readOnly />
-                            <a>{countArr[0]} </a>
+                            <span className="count">{countArr[0]} </span>
                         </li>
                         <li>
                             <Rating name="half-rating-read" value={2} readOnly />
-                            <a>{countArr[1]}</a>
+                            <span className="count">{countArr[1]} </span>
                         </li>
                         <li>
                             <Rating name="half-rating-read" value={3} readOnly />
-                            <a>{countArr[2]}</a>
+                            <span className="count">{countArr[2]} </span>
                         </li>
                         <li>
                             <Rating name="half-rating-read" value={4} readOnly />
-                            <a>{countArr[3]}</a>
+                            <span className="count">{countArr[3]} </span>
                         </li>
                         <li>
                             <Rating name="half-rating-read" value={5} readOnly />
-                            <a>{countArr[4]}</a>
+                            <span className="count">{countArr[4]} </span>
                         </li>
                     </ul>
 

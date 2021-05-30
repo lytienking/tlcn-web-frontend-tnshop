@@ -1,0 +1,15 @@
+.CheckBoxMain {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    .radio {
+        margin-bottom: 0;
+        text-transform: capitalize;
+    }
+    .CheckBoxMain span{
+        font-size: 15px;
+    }
+    .rightCheckBox{
+        padding-left: 30px;
+    }
+}

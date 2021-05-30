@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import cartApi from "../../../../api/cartApi";
 import { getCartDetails } from "../../../../actions/user";
 import Payment from "./components/Payment";
+import CheckBoxDelivery from "./components/CheckBoxDelivery";
 import _ from "lodash";
 import "./index.scss";
 import { setCart } from "../../../../actions/cart";
@@ -49,6 +50,7 @@ class Cart extends Component {
             }
         })();
     }
+    
 
     render() {
         const { cart } = this.props;
@@ -81,7 +83,10 @@ class Cart extends Component {
             <div className="cart">
                 <Container>
                     <Row>
-                        <Col xs={8}>{cartItemArray}</Col>
+                        <Col xs={8}>
+                            {cartItemArray}
+                            <CheckBoxDelivery/>
+                        </Col>
                         <Col xs={4}>
                             <Payment />
                         </Col>

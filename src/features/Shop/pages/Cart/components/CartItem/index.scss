@@ -25,11 +25,11 @@
         font-size: 20px;
     }
     .del {
-        color: red;
+        color: rgb(12, 12, 12);
         cursor: pointer;
     }
     .del:hover {
-        color: #000;
+        color: #ff5e00;
     }
     .action-quantity {
         display: flex;
@@ -49,8 +49,14 @@
             background-color: #eee;
         }
         .action:hover {
-            background-color: blue;
+            background-color: #ff5e00;
             color: #fff;
         }
+    }
+    .submit{
+        cursor: pointer;
+    }
+    .submit:hover{
+        color: #ff5e00;
     }
 }
