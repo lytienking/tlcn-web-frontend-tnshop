@@ -50,7 +50,21 @@ class Cart extends Component {
             }
         })();
     }
-    
+    onChangeFee(fee) {
+        (async () => {
+            try {
+                let params = {
+                    fee
+                };
+                const response = await cartApi.updateFeeDelivery(params);
+                console.log("fee",response);
+                let action = setCart(response.data);
+                store.dispatch(action);
+            } catch (error) {
+                console.log(`failed update cart as ${error}`);
+            }
+        })();
+    }
 
     render() {
         const { cart } = this.props;
@@ -85,7 +99,7 @@ class Cart extends Component {
                     <Row>
                         <Col xs={8}>
                             {cartItemArray}
-                            <CheckBoxDelivery/>
+                            <CheckBoxDelivery onChangeFee={this.onChangeFee}/>
                         </Col>
                         <Col xs={4}>
                             <Payment />

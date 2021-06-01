@@ -8,7 +8,7 @@ export default class CheckBoxDelivery extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            valuePriceDelivery: 11000,
+            valuePriceDelivery: 11,
             stateCheckA:true,
             stateCheckB:false,
         };
@@ -16,19 +16,21 @@ export default class CheckBoxDelivery extends Component {
         this.handleChangeB = this.handleChangeB.bind(this);
     }
     
-    handleChangeA(event) {
+    handleChangeA() {
         this.setState({
-            valuePriceDelivery: 11000,
+            valuePriceDelivery: 11,
             stateCheckB:false,
             stateCheckA:true,
         });
+        this.props.onChangeFee(11)
     }
-    handleChangeB(event) {
+    handleChangeB() {
         this.setState({
-            valuePriceDelivery: 23000,
+            valuePriceDelivery: 23,
             stateCheckA:false,
             stateCheckB:true,
         });
+        this.props.onChangeFee(23)
     }
     
     render() {

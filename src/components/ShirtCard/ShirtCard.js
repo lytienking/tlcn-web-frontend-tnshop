@@ -9,6 +9,7 @@ import FindInPageIcon from "@material-ui/icons/FindInPage";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
+import Rating from "@material-ui/lab/Rating";
 import "./ShirtCard.scss";
 
 export default class ShirtCard extends Component {
@@ -26,6 +27,11 @@ export default class ShirtCard extends Component {
     render() {
         const { size, shirt, type, handleDeleteFromFavorites } = this.props;
         const isInFavorite = handleDeleteFromFavorites !== undefined;
+        const arrRating =[];
+        shirt.comments.forEach(element => {
+            arrRating.push(element.rating);
+        });
+        const sum=arrRating.reduce((partial_sum, a) => partial_sum + a,0);
         return (
             <Card className="ShirtCard">
                 <div className="hover">
@@ -79,6 +85,10 @@ export default class ShirtCard extends Component {
                     </div>
                     <div className="price">
                         <span>{shirt.price}.000 đ</span>
+                    </div>
+                    <div className="rating">
+                        <Rating name="half-rating-read" value={sum/arrRating.length} size="small" precision={0.5} readOnly />
+                        <span>({arrRating.length})</span>
                     </div>
                 </CardContent>
                 <Snackbar

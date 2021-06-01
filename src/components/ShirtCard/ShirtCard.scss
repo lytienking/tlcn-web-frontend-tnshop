@@ -45,6 +45,9 @@
         height: 30%;
         font-family: "Poppins", sans-serif;
         font-size: 14px;
+        .rating {
+            display: flex;
+        }
         .price{
             margin-top: 5px;
             letter-spacing: -.56px;

@@ -6,7 +6,6 @@ import "./FeedBack.scss";
 import Rating from "@material-ui/lab/Rating";
 
 function FeedBack(props) {
-    console.log("afa",props);
     const arrRating =[];
     const countArr =[0,0,0,0,0];
     props.commentsProduct.forEach(element => {

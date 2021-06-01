@@ -16,7 +16,7 @@ import "./index.scss";
 
 function Payment(props) {
     const history=useHistory();
-    let {totalPrice: total} = props.cart;
+    let {totalPrice: total,feeDelivery:fee} = props.cart;
     const [openAlert,setOpenAlert]=useState(false);
     const [content,setContent]=useState("");
     const [type,setType]=useState("");
@@ -73,11 +73,11 @@ function Payment(props) {
                     if (response.success) {
                         setOpenAlert(true);
                         setContent(
-                            "Đã đặt hàng thành công. Quý khách vui lòng kiểm tra mail."
+                            "Đã đặt hàng thành công. Quý khách sẽ được chuyển sang trang thanh toán."
                         );
                         setType("success");
                         setTimeout(function () {
-                            history.push("/shop/60507c6e89323c1f3c905655");
+                            history.push("/user/checkout");
                         }, 2000);
                     } else {
                         setOpenAlert(true);
@@ -124,13 +124,13 @@ function Payment(props) {
             <div className="cost">
                 <p>Phí giao hàng</p>
                 <div className="number">
-                    0 <u>đ</u>
+                    {fee}.000<u>đ</u>
                 </div>
             </div>
             <div className="cost total">
                 <p>Tổng cộng</p>
                 <div className="number">
-                     {total}.000<u>đ</u>
+                     {total+fee}.000<u>đ</u>
                 </div>
             </div>
             <h5 className="mb-3">Địa chỉ giao hàng</h5>
@@ -202,11 +202,11 @@ function Payment(props) {
             </div> */}
             <div className="button">
                 <Button color="primary" block onClick={handleOrder}>
-                    xác nhận đơn hàng
+                    Đặt hàng
                 </Button>
-                <Button color="primary" block onClick={handleShow}>
+                {/* <Button color="primary" block onClick={handleShow}>
                    Thanh toán với ZaloPay
-                </Button>
+                </Button> */}
                 <Modal
                         open={show}
                         onClose={handleClose}

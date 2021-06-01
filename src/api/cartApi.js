@@ -16,6 +16,10 @@ const cartApi = {
     update: (body) => {
         const url="auth/update-cart";
         return axiosClient.post(url,body);
+    },
+    updateFeeDelivery: (body) => {
+        const url="auth/update-fee-delivery";
+        return axiosClient.post(url,body);
     }
 };
 
