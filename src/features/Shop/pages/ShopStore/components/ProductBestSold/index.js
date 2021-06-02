@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import { Col, Row } from "reactstrap";
 import ShirtCard from "../../../../../../components/ShirtCard/ShirtCard";
-import "./SimilarProduct.scss";
+import "./index.scss";
 
-export default class SimilarProducts extends Component {
+export default class ProductBestSold extends Component {
     render() {
         const shirts =this.props;
-        console.log("shirts",shirts);
         return (
-            <div className="similar-products">
-                <h3>Sản phẩm tương tự</h3>
+            <div className="product-store">
                 <Row>
-                    {shirts.shirts.map((item) => (
+                    {shirts.shirts.data.map((item) => (
                         <Col xs={3} key={item._id}>
-                            <ShirtCard type="newTab" shirt={item}/>
+                            <ShirtCard shirt={item} size="small"/>
                         </Col>
                     ))}
                 </Row>

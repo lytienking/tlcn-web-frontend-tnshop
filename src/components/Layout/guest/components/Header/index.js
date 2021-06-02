@@ -17,7 +17,7 @@ import { Link,NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import _, { values } from "lodash";
+import _ from "lodash";
 import LogoImg from "../../../../../assets/images/logo.png";
 import {isLogin,removeSession} from "../../../../../untils/auth";
 import { connect,useDispatch } from "react-redux";
@@ -289,25 +289,25 @@ function PrimarySearchAppBar(props) {
                         <div className="nav-list" >
                             <NavLink exact to="/" className="item" activeClassName="item--active" >
                                 <IconButton color="default" className="icon" >
-                                    <HomeIcon style={{ fontSize: 30 }} />
+                                    <HomeIcon />
                                 </IconButton>
                                 <span className="tooltiptext">Trang chủ</span>
                             </NavLink>
                             <NavLink exact to={`/shop/${"60507c6e89323c1f3c905655"}`} className="item" activeClassName="item--active"  >
                                 <IconButton className="icon" >
-                                    <StoreIcon style={{ fontSize: 30 }}/>
+                                    <StoreIcon />
                                 </IconButton>
                                 <span className="tooltiptext">Sản phẩm</span>
                             </NavLink>
                             <NavLink exact to="/about" className="item" activeClassName="item--active"  >
                                 <IconButton className="icon">
-                                    <DescriptionIcon style={{ fontSize: 30 }} />
+                                    <DescriptionIcon />
                                 </IconButton>
                                 <span className="tooltiptext">Giới thiệu</span>
                             </NavLink>
                             <NavLink exact to="/contact" className="item" activeClassName="item--active"   >
                                 <IconButton  className="icon">
-                                    <MailIcon style={{ fontSize: 30 }} />
+                                    <MailIcon />
                                 </IconButton>
                                 <span className="tooltiptext">Liên hệ</span>
                             </NavLink>

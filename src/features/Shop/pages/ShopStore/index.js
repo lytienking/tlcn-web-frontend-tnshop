@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, Row,Button } from "reactstrap";
 import { connect } from "react-redux";
 import AvatarStore from "./components/AvatarStore";
 import InfoStore from "./components/InfoStore";
 import ReviewStore from "./components/ReviewStore";
 import ProductStore from "./components/ProductStore";
+import ProductBestSold from "./components/ProductBestSold";
 import _ from "lodash";
 import shirtsApi from "../../../../api/shirtsApi";
 import userApi from "../../../../api/userApi";
@@ -17,11 +18,15 @@ class ShopStore extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            stateRenderAllProduct:true,
+            stateRenderBestSellProduct:false,
             seller: {},
             productBestSold:{},
             idStore: "",
         };
         this.onChangePagination = this.onChangePagination.bind(this);
+        this.onChangeRenderAllProduct=this.onChangeRenderAllProduct.bind(this);
+        this.onChangeRenderBestSellProduct=this.onChangeRenderBestSellProduct.bind(this);
     }
     componentDidMount() {
         (async () => {
@@ -41,7 +46,10 @@ class ShopStore extends Component {
                     seller: { ...resGetUser },
                 });
                 const resGetProductBestSold =await userApi.getProductBestSold(idStore);
-                console.log("bestsell",resGetProductBestSold);
+                this.setState({
+                    productBestSold:{...resGetProductBestSold},
+                })
+                console.log("bestsell",this.state.productBestSold);
                 let action = await getShirtsStore(response);
 
                 this.props.dispatch(action);
@@ -73,9 +81,46 @@ class ShopStore extends Component {
             }
         })();
     }
+    onChangeRenderAllProduct(){
+        this.setState({
+            stateRenderAllProduct:true,
+            stateRenderBestSellProduct:false,
+        });
+    }
+    onChangeRenderBestSellProduct(){
+        this.setState({
+            stateRenderAllProduct:false,
+            stateRenderBestSellProduct:true,
+        });
+    }
     render() {
         let { shirtsStore } = this.props;
         let {seller} =this.state;
+        let renderProduct;
+        if(this.state.stateRenderAllProduct){
+            renderProduct=(
+                _.isEmpty(shirtsStore) ? (
+                    <h1>Loading</h1>
+                ) : (
+                    <div>
+                        <ProductStore
+                            onChangePagination={
+                                this.onChangePagination
+                            }
+                            shirtsStore={shirtsStore}
+                        />
+                    </div>
+                )
+            )
+        }else{
+            renderProduct=(
+                <div>
+                    <ProductBestSold
+                        shirts={this.state.productBestSold}
+                    />
+                </div>
+            )
+        }
         //console.log("shirtstore",shirtsStore);
         return (
             <div className="shop-store">
@@ -83,7 +128,7 @@ class ShopStore extends Component {
                     <Row>
                         <Col xs={3}>
                             {_.isEmpty(seller) ? (
-                                <h1>Không có</h1>
+                                <h1>Loading</h1>
                                 ) : (
                                 <AvatarStore seller={seller}/>
                             )}
@@ -97,18 +142,15 @@ class ShopStore extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                {_.isEmpty(shirtsStore) ? (
-                                        <h1>k co</h1>
-                                    ) : (
-                                        <div>
-                                            <ProductStore
-                                                onChangePagination={
-                                                    this.onChangePagination
-                                                }
-                                                shirtsStore={shirtsStore}
-                                            />
+                                    <div className="nav-item">
+                                        <div className="button">
+                                            <Button onClick={this.onChangeRenderAllProduct}>Tất cả sản phẩm</Button>
                                         </div>
-                                    )}
+                                        <div className="button2">
+                                            <Button onClick={this.onChangeRenderBestSellProduct}>Sản phẩm bán chạy</Button>
+                                        </div>
+                                    </div>
+                                    {renderProduct}
                                 </Col>
                             </Row>
                             <Row>

@@ -59,6 +59,11 @@
         .title a {
             font-weight: 400;
             color: #000;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /* number of lines to show */
+            -webkit-box-orient: vertical;
         }
         .title a:hover {
             text-decoration: none;

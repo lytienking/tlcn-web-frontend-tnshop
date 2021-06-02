@@ -6,6 +6,7 @@ import ShirtCard from "../../../../../../components/ShirtCard/ShirtCard";
 import "./index.scss";
 
 export default function ProductStore(props) {
+    console.log("ádg",props)
     return (
         <div className="product-store">
             <Row>

@@ -1,3 +1,36 @@
 .shop-store {
     background-color: #f4f4f4;
+    .nav-item{
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        place-content: flex-start;
+        flex-shrink: 0;
+        height: 50px;
+        align-items: center;
+        .button{
+            margin-top: 10px;
+            button {
+                text-transform: uppercase;
+                background-color: #ff5e00;
+                width: 190px;
+            }
+            button:hover{
+            color: black;
+            }
+        }
+        .button2{
+            margin-top: 10px;
+            margin-left: 20px;
+            button {
+                text-transform: uppercase;
+                background-color: #ff5e00;
+                width: 190px;
+            }
+            button:hover{
+            color: black;
+            }
+        }
+    }
 }
