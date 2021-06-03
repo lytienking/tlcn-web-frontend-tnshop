@@ -28,7 +28,6 @@ function App() {
                         <Route component={User} path="/user" />
                         <Route component={Home} path="/" exact />
                         <Route component={NotFound} path="*" exact />
-                        
                     </Switch>
                 </BrowserRouter>
             </Suspense>

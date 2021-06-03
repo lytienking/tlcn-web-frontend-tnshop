@@ -56,7 +56,7 @@ const HomePage =(props) =>{
     console.log("ac",props.shirtsNew);
     return (
         <React.Fragment>
-            <Toolbar id="back-to-top-anchor" />
+            <Toolbar style={{minHeight:"0px"}} id="back-to-top-anchor" />
             <div >
             <Row className="aHead">
                 <Col xs={12} className="imageGallery">
@@ -90,7 +90,7 @@ const HomePage =(props) =>{
                 <Fab color="secondary" size="small" aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
                 </Fab>
-        </ScrollTop>           
+            </ScrollTop>           
         </React.Fragment>
         
     );
