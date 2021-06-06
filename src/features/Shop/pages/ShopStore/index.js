@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Container, Row,Button } from "reactstrap";
+import { Col, Row,Button } from "reactstrap";
 import { connect } from "react-redux";
 import AvatarStore from "./components/AvatarStore";
 import InfoStore from "./components/InfoStore";
@@ -124,7 +124,6 @@ class ShopStore extends Component {
         //console.log("shirtstore",shirtsStore);
         return (
             <div className="shop-store">
-                <Container className="shop-store">
                     <Row>
                         <Col xs={3}>
                             {_.isEmpty(seller) ? (
@@ -160,7 +159,6 @@ class ShopStore extends Component {
                             </Row>
                         </Col>
                     </Row>
-                </Container>
             </div>
         );
     }

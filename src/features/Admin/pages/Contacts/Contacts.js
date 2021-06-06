@@ -86,7 +86,7 @@ export default function Contacts() {
                                 let params ={
                                     id
                                 }
-                                const response = adminApi.deleteContact(params);
+                                adminApi.deleteContact(params);
                                 return { ...prevState, data };
                             });
                         }, 600);

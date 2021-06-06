@@ -4,14 +4,7 @@ import {useHistory} from "react-router-dom";
 import {Snackbar} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { Button} from "reactstrap";
-import {
-    Modal,  
-    Card,
-    CardContent,
-    CardHeader,
-} from "@material-ui/core";
 import userApi from "../../../../../../api/userApi";
-import {getUserId} from "../../../../../../untils/auth";
 import "./index.scss";
 
 function Payment(props) {
@@ -20,44 +13,9 @@ function Payment(props) {
     const [openAlert,setOpenAlert]=useState(false);
     const [content,setContent]=useState("");
     const [type,setType]=useState("");
-    const [link,setLink]=useState("");
     const [street,setStreet] = useState("");
     const [district,setDistrict] = useState("Quận 1");
     const [phone,setPhone]=useState(0);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => {
-        (async () =>{
-            try {
-                let params={
-                    userId:getUserId()
-                }
-                const response=await userApi.payment(params);
-                if(response.data.return_code===1){
-                    setLink(response.data.order_url);
-                    setShow(true);
-                    setTimeout(()=>{
-                        const callback= userApi.callback();
-                        console.log(callback)
-                        if(callback){
-                            setOpenAlert(true);
-                            setContent(
-                                "Đã thanh toán thành công."
-                            );
-                            setType("success");
-                            setTimeout(function () {
-                                history.push("/shop");
-                            }, 2000);
-                        }
-                    },30000)
-                }
-                
-                
-            } catch (error) {
-                console.log(`failed remove cart api as ${error}`);
-            }   
-        })();
-    } 
     const handleOrder = () => {
         (async () =>{
             try {
@@ -95,23 +53,7 @@ function Payment(props) {
             }   
         })();
     }
-    const generateBodyModal = () =>{
-        const bodyModal = (
-            <div style={{}} className="body">
-                <Card className="">
-                    <CardHeader
-                        title="Click vào link để sang trang thanh toán"
-                    />
-                    
-                    <CardContent>
-                        <a href={link} target="_blank" ref="noreferrer" >{link}</a>
-                    </CardContent>
-                   
-                </Card>
-            </div>
-        );
-        return bodyModal;
-    }
+    
     return (
         <div className="payment">
             <h5 className="mb-3">Thông tin đơn hàng</h5>
@@ -196,26 +138,10 @@ function Payment(props) {
                     
                 </form>
             </div>
-            {/* <div>
-                <label for="fname">Tên đường</label>
-                <input value={street} onChange={(event)=>{setStreet(event.target.value)}} required/>
-            </div> */}
             <div className="button">
                 <Button color="primary" block onClick={handleOrder}>
                     Đặt hàng
                 </Button>
-                {/* <Button color="primary" block onClick={handleShow}>
-                   Thanh toán với ZaloPay
-                </Button> */}
-                <Modal
-                        open={show}
-                        onClose={handleClose}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                        className="Modal"
-                    >
-                        {generateBodyModal()}
-                    </Modal>
             </div>
             
             <Snackbar
