@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Container, Row,Button } from "reactstrap";
+import { Col, Row,Button } from "reactstrap";
 import { connect } from "react-redux";
 import AvatarStore from "./components/AvatarStore";
 import InfoStore from "./components/InfoStore";
@@ -11,8 +11,35 @@ import shirtsApi from "../../../../api/shirtsApi";
 import userApi from "../../../../api/userApi";
 import {setComments} from "../../../../actions/user";
 import {getShirtsStore} from "../../../../actions/user";
+import {isLogin} from "../../../../untils/auth";
+import IconButton from "@material-ui/core/IconButton";
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import {compose} from "redux";
+import { withStyles } from "@material-ui/styles";
+import { withRouter } from "react-router-dom";
 import "./index.scss";
-//import shirts from "../../../../reducers/shirts";
+const useStyles = (theme) => ({
+    root: {},
+    row: {
+        height: "42px",
+        display: "flex",
+        alignItems: "center",
+        marginTop: theme.spacing(1),
+    },
+    spacer: {
+        flexGrow: 1,
+    },
+    importButton: {
+        marginRight: theme.spacing(1),
+    },
+    exportButton: {
+        marginRight: theme.spacing(1),
+    },
+    searchInput: {
+        marginRight: theme.spacing(1),
+    },
+});
 
 class ShopStore extends Component {
     constructor(props) {
@@ -27,6 +54,21 @@ class ShopStore extends Component {
         this.onChangePagination = this.onChangePagination.bind(this);
         this.onChangeRenderAllProduct=this.onChangeRenderAllProduct.bind(this);
         this.onChangeRenderBestSellProduct=this.onChangeRenderBestSellProduct.bind(this);
+        this.onClickChat=this.onClickChat.bind(this);
+        this.onClickFollow=this.onClickFollow.bind(this);
+    }
+    
+    onClickChat(){
+        console.log("Chat");
+        if(isLogin()){
+            this.props.history.push("/user/login");
+        }else{
+            this.props.history.push("/user/chat");
+        }
+    }
+
+    onClickFollow(){
+        console.log("Follow");
     }
     componentDidMount() {
         (async () => {
@@ -123,8 +165,7 @@ class ShopStore extends Component {
         }
         //console.log("shirtstore",shirtsStore);
         return (
-            <div className="shop-store">
-                <Container className="shop-store">
+                <div className="shop-store">
                     <Row>
                         <Col xs={3}>
                             {_.isEmpty(seller) ? (
@@ -132,7 +173,21 @@ class ShopStore extends Component {
                                 ) : (
                                 <AvatarStore seller={seller}/>
                             )}
-                            
+                            <div className="action-with-shop">
+                                <div className="action-chat">
+                                    <IconButton onClick={this.onClickChat} >
+                                        <QuestionAnswerIcon style={{fontSize:"40"}} />
+                                        <span>Trò chuyện</span>
+                                    </IconButton>
+                                </div>
+                                <div className="action-follow">
+                                    <IconButton onClick={this.onClickFollow}>
+                                        +<StorefrontIcon style={{fontSize:"40",color:"#ff5e00"}}/>
+                                        <span className="text-follow">Theo dõi</span>
+                                    </IconButton>
+                                </div>
+                                
+                            </div>
                         </Col>
                         <Col xs={9}>
                             <Row>
@@ -160,7 +215,6 @@ class ShopStore extends Component {
                             </Row>
                         </Col>
                     </Row>
-                </Container>
             </div>
         );
     }
@@ -169,4 +223,4 @@ const mapStateToProps = (state) => ({
     shirtsStore: state.shirts.shirtsStore,
 });
 
-export default connect(mapStateToProps, null)(ShopStore);
+export default compose(withStyles(useStyles),withRouter,connect(mapStateToProps, null)) (ShopStore);

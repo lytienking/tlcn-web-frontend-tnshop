@@ -6,7 +6,6 @@ import ShirtCard from "../../../../../../components/ShirtCard/ShirtCard";
 import "./index.scss";
 
 export default function ProductStore(props) {
-    console.log("ádg",props)
     return (
         <div className="product-store">
             <Row>
@@ -16,13 +15,15 @@ export default function ProductStore(props) {
                     </Col>
                 ))}
             </Row>
-            <div className="pagination">
+            <Row className="mt-5">
+                <Col sm={{ size: 6, offset: 4 }}>
                 <Pagination
                     count={props.shirtsStore.pages}
                     color="secondary"
                     onChange={props.onChangePagination}
                 />
-            </div>
+                </Col>
+            </Row>
         </div>
     );
 }

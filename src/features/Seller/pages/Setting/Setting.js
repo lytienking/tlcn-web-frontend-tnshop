@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Setting = (props) => {
-    const dispatch = useDispatch();
     const store = useStore();
     const classes = useStyles();
     const history =useHistory();
