@@ -16,8 +16,6 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ScrollTop from "../../../../components/ScrollTop/ScrollTop";
 import "./styles.scss"
-import io from "socket.io-client";
-const socket = io("http://localhost:3001");
 const HomePage =(props) =>{
     
     const images = [

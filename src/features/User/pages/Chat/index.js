@@ -15,12 +15,6 @@ import { IconButton } from '@material-ui/core';
 function Chat(props){
     const [send, setSend] = useState('')
 
-    useEffect(()=>{
-        socket.on('hello', (data)=>{
-            console.log(data.message)
-        })
-    }, [])
-
     function formatIcon(send) {
         
         //Đây là list icon dùng để duyệt và đổ ra dữ liệu
