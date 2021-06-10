@@ -1,13 +1,22 @@
 .sideBar-body {
     position: relative;
     padding: 10px !important;
-    border-bottom: 1px solid #f7f7f7;
     height: 72px;
     margin: 0 !important;
     cursor: pointer;
   }
 .sideBar-body:hover {
-    background-color: #f2f2f2;
+    background-color: rgb(228, 231, 232);
+    border-radius: 25px;
+}
+.sideBar-body-active{
+    position: relative;
+    padding: 10px !important;
+    height: 72px;
+    margin: 0 !important;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: rgb(228, 231, 232);
 }
 .sideBar-avatar {
     text-align: center;
@@ -19,13 +28,14 @@
     width: 49px;
 }
 .sideBar-main {
-padding: 0 !important;
+    padding: 0 !important;
 }
 
 .sideBar-main .sideBar-row {
-padding: 0 !important;
-margin: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
+
 .sideBar-name {
     padding: 10px !important;
 }

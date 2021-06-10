@@ -8,7 +8,7 @@ span {
 .app {
   position: relative;
   overflow: hidden;
-  top: 19px;
+  top: 10px;
   height: calc(100% - 38px);
   margin: auto;
   padding: 0;
@@ -55,32 +55,7 @@ span {
   transition: left 0.3s ease;
 
 }
-.sideBar {
-  padding: 0 !important;
-  margin: 0 !important;
-  background-color: #fff;
-  overflow-y: auto;
-  border: 1px solid #f7f7f7;
-  height: calc(100% - 120px);
-}
 
-.sideBar-body {
-  position: relative;
-  padding: 10px !important;
-  border-bottom: 1px solid #f7f7f7;
-  height: 72px;
-  margin: 0 !important;
-  cursor: pointer;
-}
-
-.sideBar-body:hover {
-  background-color: #f2f2f2;
-}
-
-.sideBar-avatar {
-  text-align: center;
-  padding: 0 !important;
-}
 .conversation {
   padding: 0 !important;
   margin: 0 !important;
@@ -96,6 +71,10 @@ span {
   overflow-y: auto;
   border: 1px solid #f7f7f7;
   height: 100%;
+}
+.message{
+  overflow-y: scroll !important;
+  height: 35.2rem !important;
 }
 .message-previous {
   margin : 0 !important;
@@ -113,7 +92,7 @@ span {
   font-weight: 700;
 }
 .message-main-sender {
-  padding: 3px 20px !important;
+  padding: 30px 20px !important;
   margin-left: 40% !important;
   max-width: 60%;
 }
@@ -141,8 +120,13 @@ span {
   font-size: 14px;
   padding-bottom: 0 !important;
 }
+.message-text img{
+  width: 17px;
+  height: 17px;
+}
 .message-main-receiver {
-  /*padding: 10px 20px;*/
+  padding-top: 10px;
+  //padding: 10px 20px !important;
   max-width: 60%;
 }
 .receiver {
@@ -239,10 +223,10 @@ span {
   height: 20px;
 }
 .reply {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   height: 60px;
-  width: 64%;
+  width:100%;
   background-color: #f5f1ee;
   padding: 10px 5px 10px 5px !important;
   margin: 0 !important;

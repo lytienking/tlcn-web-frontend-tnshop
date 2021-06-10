@@ -9,7 +9,7 @@ import queryString, { stringify } from 'query-string'
 import parse from 'html-react-parser';
 import { IconButton } from '@material-ui/core';
 import io from "socket.io-client";
-import {getUserId,getName} from "../../../../untils/auth"
+import {getUserId,getName,getGroupId} from "../../../../untils/auth"
 
 const socket = io("http://localhost:3001");
 function Chat(props){
@@ -196,10 +196,18 @@ function Chat(props){
 
         if (load){
             const fetchData = async () => {
-
-                const params = {
-                    id_user1: userID1,
-                    id_user2: userID2
+                let params;
+                if(getGroupId()===1){
+                    params = {
+                        id_user1: userID1,
+                        id_user2: userID2
+                    }
+                }
+                else{
+                    params = {
+                        id_user1: userID2,
+                        id_user2: userID1
+                    }
                 }
     
                 const query = '?' + queryString.stringify(params)
@@ -254,7 +262,7 @@ function Chat(props){
                             <Col sm={12} className="previous">
                                 {
                                     conversation && conversation.map(value =>(
-                                        value.category === 'send' ?(
+                                        value.category !== 'send' ?(
                                         <div className="message-main-sender">
                                             <div className="sender">
                                                 <span className="message-time pull-right">Bạn</span>
@@ -268,7 +276,7 @@ function Chat(props){
                                         ):(
                                         <div className="message-main-receiver">
                                             <div className="receiver">
-                                                <span className="message-time pull-right">Nó</span>
+                                                <span className="message-time pull-right">{value.name}</span>
                                                 <div className="message-text">
                                                     {
                                                         parse(value.message)
@@ -287,46 +295,47 @@ function Chat(props){
                                 </div>)
                                 }
                                 
-                                { emotion && (<div className="show_icon">
-                                    <div className="list_icon">
-                                        <div className="icon" onClick={() => onClickIcon(":(")}>
-                                            <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742760.svg" alt=""/>
-                                        </div>
-                                        <div className="icon" onClick={() => onClickIcon("*_*")}>
-                                            <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742750.svg" alt=""/>
-                                        </div>
-                                        <div className="icon" onClick={() => onClickIcon(":)")}>
-                                            <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742920.svg" alt=""/>
-                                        </div>
-                                        <div className="icon" onClick={() => onClickIcon("T_T")}>
-                                            <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742822.svg" alt=""/>
-                                        </div>
-                                        <div className="icon" onClick={() => onClickIcon("-,-")}>
-                                            <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742787.svg" alt=""/>
-                                        </div>
-                                        <div className="icon" onClick={() => onClickIcon(":*")}>
-                                            <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742745.svg" alt=""/>
-                                        </div>
-                                    </div>
-                                </div>)
-                                }
-                                <Row className="reply">
-                                    <Col sm={1} xs={1} className="reply-emojis">
-                                        <IconButton style={{padding:"0",marginLeft:"15px"}} onClick={onClickEmotion}>
-                                            <EmojiEmotionsIcon fontSize="large" className="icon-emojis"/>
-                                        </IconButton>
-                                    </Col>
-                                    <Col sm={10} xs={10} className="reply-main">
-                                        <input className="form-control" type="text" value={send} onChange={onChangeSend} />
-                                    </Col>
-                                    <Col sm={1} xs={1} className="reply-send">
-                                        <IconButton style={{padding:"0",marginLeft:"15px"}} onClick={handlerSend} >
-                                            <SendIcon fontSize="large"/>
-                                        </IconButton>
-                                    </Col>
-                                </Row>
+                                
                             </Col>
                         </Row>
+                    </Row>
+                    { emotion && (<div className="show_icon">
+                        <div className="list_icon">
+                            <div className="icon" onClick={() => onClickIcon(":(")}>
+                                <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742760.svg" alt=""/>
+                            </div>
+                            <div className="icon" onClick={() => onClickIcon("*_*")}>
+                                <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742750.svg" alt=""/>
+                            </div>
+                            <div className="icon" onClick={() => onClickIcon(":)")}>
+                                <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742920.svg" alt=""/>
+                            </div>
+                            <div className="icon" onClick={() => onClickIcon("T_T")}>
+                                <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742822.svg" alt=""/>
+                            </div>
+                            <div className="icon" onClick={() => onClickIcon("-,-")}>
+                                <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742787.svg" alt=""/>
+                            </div>
+                            <div className="icon" onClick={() => onClickIcon(":*")}>
+                                <img className="img_icon" src="https://www.flaticon.com/svg/static/icons/svg/742/742745.svg" alt=""/>
+                            </div>
+                        </div>
+                    </div>)
+                    }
+                    <Row className="reply">
+                        <Col sm={1} xs={1} className="reply-emojis">
+                            <IconButton style={{padding:"0",marginLeft:"15px"}} onClick={onClickEmotion}>
+                                <EmojiEmotionsIcon fontSize="large" className="icon-emojis"/>
+                            </IconButton>
+                        </Col>
+                        <Col sm={10} xs={10} className="reply-main">
+                            <input className="form-control" type="text" value={send} onChange={onChangeSend} />
+                        </Col>
+                        <Col sm={1} xs={1} className="reply-send">
+                            <IconButton style={{padding:"0",marginLeft:"15px"}} onClick={handlerSend} >
+                                <SendIcon fontSize="large"/>
+                            </IconButton>
+                        </Col>
                     </Row>
                 </Col>
             </Row>

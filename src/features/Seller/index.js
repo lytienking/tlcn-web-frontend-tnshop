@@ -10,6 +10,7 @@ import Setting from "./pages/Setting/Setting";
 import SellerLayout from "../../components/Layout/seller/SellerLayout";
 import OrdersDetail from "../../components/OrdersDetail";
 import Order from "./pages/Orders/Orders";
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 const pages = [
     {
         title: "Tài khoản",
@@ -26,6 +27,11 @@ const pages = [
         title: "Đơn hàng",
         href: "/seller/order",
         icon: <ShoppingBasketIcon />,
+    },
+    {
+        title: "Trò Chuyện",
+        href: "/user/chat",
+        icon: <QuestionAnswerIcon />,
     },
     {
         title: "Cài đặt",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from "reactstrap";
 import storeImg from "../../../../../assets/images/store_img.png";
@@ -13,23 +13,23 @@ ListUser.defaultProps = {
     GetUserID: null
 }
 function ListUser(props) {
-
+    const[stateActive,setStateActive]=useState("5fd63c2bdf53b90a80e05d72");
     const { listUser, GetUserID } = props
 
     const onClickUser = (user_id) => {
         
         GetUserID(user_id)
-
+        setStateActive(user_id)
     }
-
+    console.log("state",stateActive);
     return (
         <div>
             {
                 listUser && listUser.map(value => (
-                    <Row className="sideBar-body" key={value._id} onClick={() => onClickUser(value._id)}>
+                    <Row className={value._id===stateActive?"sideBar-body-active":"sideBar-body"} key={value._id} onClick={() => onClickUser(value._id)}>
                         <Col sm={3} xs={3} className="sideBar-avatar">
                             <div className="avatar-icon">
-                                <img src={value.avatar?value.avatar:storeImg}/>
+                                <img src={value.avatar?value.avatar:storeImg} alt="avatar"/>
                             </div>
                         </Col>
                         <Col sm={9} xs={9} className="sideBar-main">
