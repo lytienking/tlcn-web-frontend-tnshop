@@ -60,7 +60,7 @@ class ShopStore extends Component {
     
     onClickChat(){
         console.log("Chat");
-        if(isLogin()){
+        if(!isLogin()){
             this.props.history.push("/user/login");
         }else{
             this.props.history.push("/user/chat");
