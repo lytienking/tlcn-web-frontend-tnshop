@@ -193,7 +193,7 @@ function Chat(props){
         return send
     }
     useEffect(() => {
-
+        console.log("Loading....")
         if (load){
             const fetchData = async () => {
                 let params;
