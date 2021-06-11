@@ -14,7 +14,13 @@ const MessengerAPI = {
     postMessage: (query) => {
         const url = `/messenger/send${query}`;
         return axiosClient.post(url);
+    },
+
+    autoSendMessage:(query) =>{
+        const url =`messenger/auto-send${query}`;
+        return axiosClient.post(url);
     }
+
 }
 
 export default MessengerAPI

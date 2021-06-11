@@ -52,26 +52,21 @@ function Chat(props){
         setUserID2(id_another)
 
     }
+    const fetchData1 = async () => {
 
+        const response = await UserAPI.getAllUserForChat()
+        console.log(response)
+
+        const filterUser = response.filter(value => {
+            return value._id !== getUserId();
+        })
+        console.log(filterUser)
+
+        setListUser(filterUser)
+    }
     useEffect(() => {
-
-        const fetchData = async () => {
-
-            const response = await UserAPI.getAllUserForChat()
-            console.log(response)
-
-            const filterUser = response.filter(value => {
-                return value._id !== getUserId();
-            })
-            console.log(filterUser)
-
-            setListUser(filterUser)
-        }
-
-        fetchData()
-
-        console.log(name)
-
+        fetchData1()
+        //console.log(name)
     }, [])
     const onChangeSend = (e) => {
 
@@ -110,6 +105,10 @@ function Chat(props){
             //Ở bên phía người nhận thì sẽ có userID1 của chính mình
             //Nếu mà có tin nhắn và đúng với id_user của người gửi đúng với userID1 của chính mình thì sẽ load
             if (message !== '' && id_user1 === userID1 && id_user2 === userID2){
+                console.log("id_user1",id_user1);
+                console.log("id_user2",id_user2);
+                console.log("idUser1",userID1);
+                console.log("idUser2",userID2);
                 setLoadMessage(true)
             }else{
                 setLoadMessage(false)
@@ -193,8 +192,10 @@ function Chat(props){
         return send
     }
     useEffect(() => {
-        console.log("Loading....")
+        console.log("load",load);
         if (load){
+            fetchData1()
+            //
             const fetchData = async () => {
                 let params;
                 if(getGroupId()===1){

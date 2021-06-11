@@ -9,15 +9,17 @@ import ProductBestSold from "./components/ProductBestSold";
 import _ from "lodash";
 import shirtsApi from "../../../../api/shirtsApi";
 import userApi from "../../../../api/userApi";
+import MessengerAPI from "../../../../api/messageApi";
 import {setComments} from "../../../../actions/user";
 import {getShirtsStore} from "../../../../actions/user";
-import {isLogin} from "../../../../untils/auth";
+import {isLogin,getUserId} from "../../../../untils/auth";
 import IconButton from "@material-ui/core/IconButton";
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import {compose} from "redux";
 import { withStyles } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
+import queryString, { stringify } from 'query-string'
 import "./index.scss";
 const useStyles = (theme) => ({
     root: {},
@@ -59,12 +61,29 @@ class ShopStore extends Component {
     }
     
     onClickChat(){
-        console.log("Chat");
-        if(!isLogin()){
-            this.props.history.push("/user/login");
-        }else{
-            this.props.history.push("/user/chat");
-        }
+        (async () =>{
+            console.log("Chat");
+            if(!isLogin()){
+                this.props.history.push("/user/login");
+            }else{
+                
+                    const params ={
+                        id_user1: getUserId(),
+                        id_user2: this.props.match.params.id_store
+                    };
+                    const query = '?' + queryString.stringify(params);
+
+                    const response = await MessengerAPI.getAllMessage(query);
+                    console.log("resQ",response);
+                    if(response.data!==null){
+                        this.props.history.push("/user/chat");
+                    }else{
+                        await MessengerAPI.autoSendMessage(query);
+                        
+                        this.props.history.push("/user/chat");
+                    }
+            }
+        })();
     }
 
     onClickFollow(){

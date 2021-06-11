@@ -13,7 +13,7 @@ ListUser.defaultProps = {
     GetUserID: null
 }
 function ListUser(props) {
-    const[stateActive,setStateActive]=useState("5fd63c2bdf53b90a80e05d72");
+    const[stateActive,setStateActive]=useState("");
     const { listUser, GetUserID } = props
 
     const onClickUser = (user_id) => {
