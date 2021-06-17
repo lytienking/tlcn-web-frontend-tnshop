@@ -7,7 +7,8 @@ import {
     SET_COMMENTS_PRODUCT,
     UPDATE_AVATAR,
     GET_ORDER_DETAIL,
-    
+    GET_LISTID_ORDER,
+    GET_PRICE_ORDER
 } from "../constants/typeRedux";
 
 const initialState = {
@@ -30,9 +31,15 @@ const initialState = {
     comments:[],
     commentsProduct:[],
     orderDetail:{},
+    listIdOrder:"",
+    totalPriceOrder:0,
 };
 export default function (state = initialState, action) {
     switch (action.type) {
+        case GET_PRICE_ORDER:
+            return{...state,totalPriceOrder:action.payload};
+        case GET_LISTID_ORDER:
+            return{...state,listIdOrder:action.payload};
         case GET_ORDER_DETAIL:
             return {...state,orderDetail:action.payload};
         case FORGOT:           

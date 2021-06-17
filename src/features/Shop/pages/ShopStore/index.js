@@ -19,7 +19,7 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import {compose} from "redux";
 import { withStyles } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
-import queryString, { stringify } from 'query-string'
+import queryString from 'query-string'
 import "./index.scss";
 const useStyles = (theme) => ({
     root: {},

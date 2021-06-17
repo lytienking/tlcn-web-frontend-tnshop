@@ -19,3 +19,5 @@ export const SET_COMMENTS="set_comments";
 export const SET_COMMENTS_PRODUCT="set_comments_product";
 export const SET_CART="set_cart";
 export const UPDATE_AVATAR="update_avatar";
+export const GET_LISTID_ORDER="get-listid-order";
+export const GET_PRICE_ORDER="get-price-order";

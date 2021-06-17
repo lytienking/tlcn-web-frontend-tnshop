@@ -1,10 +1,11 @@
 import React,{useState} from "react";
-import {connect} from "react-redux";
+import {connect,useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {Snackbar} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { Button} from "reactstrap";
 import userApi from "../../../../../../api/userApi";
+import {getListIDOrder,getPriceOrder} from "../../../../../../actions/user";
 import "./index.scss";
 
 function Payment(props) {
@@ -16,6 +17,7 @@ function Payment(props) {
     const [street,setStreet] = useState("");
     const [district,setDistrict] = useState("Quận 1");
     const [phone,setPhone]=useState(0);
+    const dispatch = useDispatch();
     const handleOrder = () => {
         (async () =>{
             try {
@@ -28,6 +30,11 @@ function Payment(props) {
                 }
                 if(params.street!==""&& params.phone!==0 && params.district!==""){
                     const response=await userApi.order(params);
+                    const action1 = await getListIDOrder(response.data);
+                    const action2 = await getPriceOrder(total);
+                    dispatch(action1);
+                    dispatch(action2);
+                    console.log("strIdOrder",response.data)
                     if (response.success) {
                         setOpenAlert(true);
                         setContent(

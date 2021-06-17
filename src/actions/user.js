@@ -12,7 +12,23 @@ import {
     UPDATE_AVATAR,
     GET_SHIRTS_STORE, 
     GET_ORDER_DETAIL,
+    GET_LISTID_ORDER,
+    GET_PRICE_ORDER,
 } from "../constants/typeRedux";
+export async function getPriceOrder(userData){
+
+    return {
+        type:GET_PRICE_ORDER,
+        payload:userData,
+    };
+}
+export async function getListIDOrder(userData){
+
+    return {
+        type:GET_LISTID_ORDER,
+        payload:userData,
+    };
+}
 
 export async function getOrderDetail(userData){
 

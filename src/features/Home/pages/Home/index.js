@@ -58,34 +58,48 @@ const HomePage =(props) =>{
         <React.Fragment>
             <Toolbar style={{minHeight:"0px"}} id="back-to-top-anchor" />
             <div >
-            <Row className="aHead">
-                <Col xs={12} className="imageGallery">
-                    <ImageGallery items={images} autoPlay={false} showThumbnails = {false} />;
-                </Col>
-            </Row>
-            <div className="logo">
-                <Row>
-                    <Col ><img src={EPLlogo} width={100} alt="logo" /></Col>
-                    <Col><img src={Bunlogo} width={120} alt="logo" /></Col>
-                    <Col><img src={Laligalogo} width={180} alt="logo" /></Col>
-                    <Col><img src={Ligue1logo} width={120} alt="logo" /></Col>
-                    <div className="seria">
-                        <Col><img src={Serialogo} width={100} alt="logo" /></Col>
+                <Row className="aHead">
+                    <Col xs={12} className="imageGallery">
+                        <ImageGallery items={images} autoPlay={false} showThumbnails = {false} />;
+                    </Col>
+                </Row>
+                <div className="logo">
+                    <Row>
+                        <Col ><img src={EPLlogo} width={100} alt="logo" /></Col>
+                        <Col><img src={Bunlogo} width={120} alt="logo" /></Col>
+                        <Col><img src={Laligalogo} width={180} alt="logo" /></Col>
+                        <Col><img src={Ligue1logo} width={120} alt="logo" /></Col>
+                        <div className="seria">
+                            <Col><img src={Serialogo} width={100} alt="logo" /></Col>
+                        </div>
+                    </Row>
+                </div>
+                <div className="new-product">
+                    <h3>Sản phẩm mới nhất</h3>
+                    <div class="ser-t">
+                        <b></b>
+                        <span><i></i></span>
+                        <b class="line"></b>
                     </div>
-                </Row>
+                    <Row xs={12} className="list-newProduct" >
+                        {props.shirtsNew.map && props.shirtsNew.map((item) => (
+                            <Col xs={3} key={item._id}>
+                                <ShirtCard shirt={item}/>
+                            </Col>
+                        ))}
+                    </Row>
+                </div>
+                <div className="spec-product">
+                    <div class="spec">
+                    <h3>Đề xuất cho bạn</h3>
+                    <div class="ser-t">
+                        <b></b>
+                        <span><i></i></span>
+                        <b class="line"></b>
+                    </div>
+                </div>
+                </div>
             </div>
-            <div className="new-product">
-                <h3>Sản phẩm mới nhất</h3>
-                <Row xs={12} >
-                    {props.shirtsNew.map && props.shirtsNew.map((item) => (
-                        <Col xs={3} key={item._id}>
-                            <ShirtCard shirt={item}/>
-                        </Col>
-                    ))}
-                </Row>
-                
-            </div>
-        </div>
             <ScrollTop {...props}>
                 <Fab color="secondary" size="small" aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
@@ -97,6 +111,7 @@ const HomePage =(props) =>{
 };
 const mapStateToProps = (state) => ({ 
     shirtsNew: state.shirts.shirtsNew,
+    shirtsStore: state.shirts.shirtsStore,
 });
 
 export default connect(mapStateToProps, null)(HomePage);

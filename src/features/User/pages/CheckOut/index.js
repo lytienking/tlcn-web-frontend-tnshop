@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
+import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -8,7 +9,8 @@ import momo from "../../../../assets/images/paymentmomo.png";
 import { Button} from "reactstrap";
 import "./index.scss";
 import { Checkbox } from "@material-ui/core";
-export default class CheckOut extends Component {
+import MomoApi from "../../../../api/momoApi";
+class CheckOut extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +19,7 @@ export default class CheckOut extends Component {
         };
         this.handleChangeA = this.handleChangeA.bind(this);
         this.handleChangeB = this.handleChangeB.bind(this);
+        this.handleCheckOut=this.handleCheckOut.bind(this);
     }
     
     handleChangeA() {
@@ -31,9 +34,27 @@ export default class CheckOut extends Component {
             stateCheckB:true,
         });
     }
-    
+    handleCheckOut(strListID,total){
+        (async () => {
+            try {
+                let body={
+                    totalPrice:total,
+                    listOrderId:strListID
+                }
+                const respone= await MomoApi.CheckOut(body);
+                console.log("réajsd",respone);
+            } catch (error) {
+                console.log(`failed update cart as ${error}`);
+            }
+        })();
+        console.log("here");
+    }
+
     render() {
         let renderContent;
+        let{listIdOrder:strIdOrder,totalPriceOrder: total}=this.props;
+        console.log("str",strIdOrder);
+        console.log("str2",total);
         if(this.state.stateCheckA){
             renderContent=(
                 <Card>
@@ -51,7 +72,7 @@ export default class CheckOut extends Component {
                 <Card>
                     <CardContent>
                         <div className="button2">
-                            <Button color="primary">
+                            <Button color="primary" onClick={this.handleCheckOut(strIdOrder,total)}>
                                 Thanh toán ngay
                             </Button>
                         </div>
@@ -102,3 +123,8 @@ export default class CheckOut extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ({
+    listIdOrder:state.user.listIdOrder,
+    totalPriceOrder:state.user.totalPriceOrder
+});
+export default connect(mapStateToProps, null)(CheckOut);
