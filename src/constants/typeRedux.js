@@ -21,3 +21,4 @@ export const SET_CART="set_cart";
 export const UPDATE_AVATAR="update_avatar";
 export const GET_LISTID_ORDER="get-listid-order";
 export const GET_PRICE_ORDER="get-price-order";
+export const GET_LINK_MOMO="get-link-momo";

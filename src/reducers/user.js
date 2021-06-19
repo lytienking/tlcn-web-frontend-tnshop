@@ -8,7 +8,8 @@ import {
     UPDATE_AVATAR,
     GET_ORDER_DETAIL,
     GET_LISTID_ORDER,
-    GET_PRICE_ORDER
+    GET_PRICE_ORDER,
+    GET_LINK_MOMO
 } from "../constants/typeRedux";
 
 const initialState = {
@@ -33,9 +34,12 @@ const initialState = {
     orderDetail:{},
     listIdOrder:"",
     totalPriceOrder:0,
+    linkMomo:""
 };
 export default function (state = initialState, action) {
     switch (action.type) {
+        case GET_LINK_MOMO:
+            return{...state,linkMomo:action.payload};
         case GET_PRICE_ORDER:
             return{...state,totalPriceOrder:action.payload};
         case GET_LISTID_ORDER:

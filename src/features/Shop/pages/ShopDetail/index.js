@@ -11,7 +11,6 @@ import PayCard from "./components/PayCard/PayCard";
 import MainInfo from "./components/MainInfo/MainInfo";
 import SimilarProduct from "./components/SimilarProduct/SimilarProduct";
 import FeedBack from "./components/FeedBack/FeedBack";
-
 import shirtsApi from "../../../../api/shirtsApi";
 import userApi from "../../../../api/userApi";
 import cartApi from "../../../../api/cartApi";

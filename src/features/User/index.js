@@ -7,6 +7,7 @@ import ForgotPage from "./pages/Forgot"
 import CheckOut from "./pages/CheckOut"
 import Cart from "../Shop/pages/Cart";
 import Chat from "./pages/Chat";
+import Momo from "./pages/Momo";
 import GuestLayout from '../../components/Layout/guest/GuestLayout.js'
 function User(props) {
     const match = useRouteMatch();
@@ -19,6 +20,7 @@ function User(props) {
                 <Route exact path={`${match.url}/cart`} component={Cart}/>
                 <Route exact path={`${match.url}/checkout`} component={CheckOut}/>
                 <Route exact path={`${match.url}/chat`} component={Chat}/>
+                <Route exact path={`${match.url}/momo`} component={Momo}/>
             </Switch>
         </GuestLayout>
     )

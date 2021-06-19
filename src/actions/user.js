@@ -14,16 +14,21 @@ import {
     GET_ORDER_DETAIL,
     GET_LISTID_ORDER,
     GET_PRICE_ORDER,
+    GET_LINK_MOMO
 } from "../constants/typeRedux";
+export async function getLinkMomo(userData){
+    return {
+        type:GET_LINK_MOMO,
+        payload:userData,
+    };
+}
 export async function getPriceOrder(userData){
-
     return {
         type:GET_PRICE_ORDER,
         payload:userData,
     };
 }
 export async function getListIDOrder(userData){
-
     return {
         type:GET_LISTID_ORDER,
         payload:userData,
@@ -31,14 +36,12 @@ export async function getListIDOrder(userData){
 }
 
 export async function getOrderDetail(userData){
-
     return {
         type:GET_ORDER_DETAIL,
         payload:userData,
     };
 }
 export async function forgot(userData){
-
     return {
         type:FORGOT,
         payload:userData,
@@ -46,7 +49,6 @@ export async function forgot(userData){
 }
 
 export async function registerUser(userData){
-
     return {
         type:REGISTER_USER,
         payload:userData,
@@ -54,7 +56,6 @@ export async function registerUser(userData){
 }
 
 export async function loginUser(userData){
-    
     return {
         type:LOGIN_USER,
         payload:userData,

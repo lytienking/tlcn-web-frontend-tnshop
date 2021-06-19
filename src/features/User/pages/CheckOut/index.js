@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
-import { connect } from "react-redux";
+import { connect,useDispatch } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -10,16 +10,25 @@ import { Button} from "reactstrap";
 import "./index.scss";
 import { Checkbox } from "@material-ui/core";
 import MomoApi from "../../../../api/momoApi";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
+import {Snackbar} from "@material-ui/core";
+import {getLinkMomo} from "../../../../actions/user";
 class CheckOut extends Component {
     constructor(props) {
         super(props);
         this.state = {
             stateCheckA:true,
             stateCheckB:false,
+            openAlert:false,
+            contentAlert:"loading",
+            typeAlert:"info",
         };
         this.handleChangeA = this.handleChangeA.bind(this);
         this.handleChangeB = this.handleChangeB.bind(this);
         this.handleCheckOut=this.handleCheckOut.bind(this);
+        this.handleConfirmOrder=this.handleConfirmOrder.bind(this);
     }
     
     handleChangeA() {
@@ -34,6 +43,17 @@ class CheckOut extends Component {
             stateCheckB:true,
         });
     }
+    handleConfirmOrder(props) {
+        this.setState({
+            openAlert: true,
+            contentAlert:
+                "Đã đặt hàng thành công. Cảm ơn bạn đã ủng hộ!",
+            typeAlert: "success",
+        });
+        setTimeout(() => {
+           props.history.push("/");
+        }, 2000);
+    }
     handleCheckOut(strListID,total){
         (async () => {
             try {
@@ -41,13 +61,15 @@ class CheckOut extends Component {
                     totalPrice:total,
                     listOrderId:strListID
                 }
-                const respone= await MomoApi.CheckOut(body);
-                console.log("réajsd",respone);
+                const response= await MomoApi.CheckOut(body);
+                const action = await getLinkMomo(response.data.payUrl);
+                this.props.dispatch(action);
+                this.props.history.push("/user/momo");
+                console.log("réajsd",response);
             } catch (error) {
                 console.log(`failed update cart as ${error}`);
             }
         })();
-        console.log("here");
     }
 
     render() {
@@ -60,7 +82,7 @@ class CheckOut extends Component {
                 <Card>
                     <CardContent>
                         <div className="button">
-                            <Button color="primary">
+                            <Button color="primary" onClick={(e)=>this.handleConfirmOrder(this.props)}>
                                 Xác nhận đơn hàng
                             </Button>
                         </div>
@@ -72,7 +94,7 @@ class CheckOut extends Component {
                 <Card>
                     <CardContent>
                         <div className="button2">
-                            <Button color="primary" onClick={this.handleCheckOut(strIdOrder,total)}>
+                            <Button color="primary" onClick={(e)=>this.handleCheckOut(strIdOrder,total)}>
                                 Thanh toán ngay
                             </Button>
                         </div>
@@ -119,6 +141,18 @@ class CheckOut extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Snackbar
+                        open={this.state.openAlert}
+                        autoHideDuration={6000}
+                        onClose={() => this.setState({ openAlert: false })}
+                    >
+                        <Alert
+                            onClose={() => this.setState({ openAlert: false })}
+                            severity={this.state.typeAlert}
+                        >
+                            {this.state.contentAlert}
+                        </Alert>
+                    </Snackbar>
             </div>
         );
     }
@@ -127,4 +161,4 @@ const mapStateToProps = (state) => ({
     listIdOrder:state.user.listIdOrder,
     totalPriceOrder:state.user.totalPriceOrder
 });
-export default connect(mapStateToProps, null)(CheckOut);
+export default compose(withRouter,connect(mapStateToProps, null))(CheckOut);
