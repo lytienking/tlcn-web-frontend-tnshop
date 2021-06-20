@@ -9,7 +9,7 @@ import Laligalogo from "../../../../assets/images/Laligalogo.jpg";
 import Serialogo from "../../../../assets/images/Serialogo.jpg";
 import Slider from "../../../../assets/images/slide.png";
 import shirtsApi from "../../../../api/shirtsApi";
-import {getNews} from "../../../../actions/shirts";
+import {getNameProducts, getNews} from "../../../../actions/shirts";
 import ShirtCard from "../../../../components/ShirtCard/ShirtCard";
 import Toolbar from '@material-ui/core/Toolbar';
 import Fab from '@material-ui/core/Fab';
@@ -44,7 +44,9 @@ const HomePage =(props) =>{
                 console.log("resnew",response)
                 let action = await getNews(response);
                 dispatch(action);
-                console.log(dispatch(action))
+                const responseListName= await shirtsApi.getNameProducts();
+                let action2 = await getNameProducts(responseListName);
+                dispatch(action2);
             } catch (error) {
                 console.log(`failed post register as ${error}`);
             }

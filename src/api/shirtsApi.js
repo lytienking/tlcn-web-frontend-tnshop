@@ -1,6 +1,10 @@
 import axiosClient from "./axiosClient";
 
 const shirtsApi = {
+    getNameProducts: () =>{
+        const url="product/name-products";
+        return axiosClient.get(url);
+    },
     get: (params) => {
         const url = "product/";
         return axiosClient.get(url,{params});

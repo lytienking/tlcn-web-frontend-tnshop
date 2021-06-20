@@ -4,8 +4,15 @@ import {
     GET_DETAIL,
     GET_SHIRTS_NEW ,
     GET_PARENTCATEGORIES,
-    GET_CATEGORYBYID
+    GET_CATEGORYBYID,
+    GET_NAME_PRODUCT
 } from "../constants/typeRedux";
+export async function getNameProducts(shirts){
+    return {
+        type: GET_NAME_PRODUCT,
+        payload: shirts,
+    };
+}
 export async function getNews(shirts){
     return {
         type: GET_SHIRTS_NEW,

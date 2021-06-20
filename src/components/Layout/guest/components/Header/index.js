@@ -135,7 +135,7 @@ function PrimarySearchAppBar(props) {
             console.log("values null");
         }else{
             const keyword={
-                keyword:value.title,
+                keyword:value.name,
             }
             const response=await shirtsApi.search(keyword);
             const result ={
@@ -163,19 +163,8 @@ function PrimarySearchAppBar(props) {
     const handleLogout = ()=> {
         removeSession();
     };
-    const top100Products = [
-        { title: 'Áo MC', year: 1994 },
-        { title: 'Áo Bayern', year: 1994 },
-        { title: 'Áo Barca', year: 1994 },
-        { title: 'Áo Dortmund', year: 1994 },
-        { title: 'Áo PSG', year: 1994 },
-        { title: 'Áo ACM', year: 1994 },
-        { title: 'Áo Real', year: 1994 },
-        
-      ];
-    
-    const options = top100Products.map((option) => {
-        const firstLetter = option.title[0].toUpperCase();
+    const options =props.shirtsName.map((option) => {
+        const firstLetter = option.name[0].toUpperCase();
         return {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
             ...option,
@@ -245,15 +234,16 @@ function PrimarySearchAppBar(props) {
                         <Badge>
                                     <Autocomplete
                                         id="grouped-demo"
+                                        
                                         onChange={(event, newValue) => {
                                                 if (typeof newValue === 'string' ) {
                                                     setValue({
-                                                    title: newValue,
+                                                    name: newValue,
                                                     });
                                                 } else if (newValue && newValue.inputValue) {
                                                     // Create a new value from the user input
                                                     setValue({
-                                                    title: newValue.inputValue,
+                                                    name: newValue.inputValue,
                                                     });
                                                 } else {
                                                     setValue(newValue);
@@ -261,7 +251,7 @@ function PrimarySearchAppBar(props) {
                                             }}
                                         options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
                                         groupBy={(option) => option.firstLetter}
-                                        getOptionLabel={(option) => option.title}
+                                        getOptionLabel={(option) => option.name}
                                         style={{ 
                                             width: 230,
                                             height:70,
@@ -357,5 +347,6 @@ function PrimarySearchAppBar(props) {
 }
 const mapStateToProps = (state) => ({
     cart: state.cart,
+    shirtsName:state.shirts.shirtsName
 });
 export default connect(mapStateToProps, null)(PrimarySearchAppBar);
