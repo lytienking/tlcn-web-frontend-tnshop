@@ -9,8 +9,10 @@ import Shirts from "./pages/FootballShirts/FootballShirts";
 import Setting from "./pages/Setting/Setting";
 import SellerLayout from "../../components/Layout/seller/SellerLayout";
 import OrdersDetail from "../../components/OrdersDetail";
+import Statistic from "./pages/Statistic/index";
 import Order from "./pages/Orders/Orders";
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import BarChartIcon from '@material-ui/icons/BarChart';
 const pages = [
     {
         title: "Tài khoản",
@@ -32,6 +34,11 @@ const pages = [
         title: "Trò Chuyện",
         href: "/user/chat",
         icon: <QuestionAnswerIcon />,
+    },
+    {
+        title: "Thống kê",
+        href: "/seller/statistic",
+        icon: <BarChartIcon />,
     },
     {
         title: "Cài đặt",
@@ -56,6 +63,7 @@ function Seller(props) {
                 />
                 <Route exact path={`${match.url}/shirts`} component={Shirts}/>
                 <Route exact path={`${match.url}/order`} component={Order}/>
+                <Route exact path={`${match.url}/statistic`} component={Statistic}/>
                 <Route
                     exact path={`${match.url}/setting`}
                     component={Setting}
