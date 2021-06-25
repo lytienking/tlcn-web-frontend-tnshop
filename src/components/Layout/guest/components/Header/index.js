@@ -19,7 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import _ from "lodash";
 import LogoImg from "../../../../../assets/images/logo.png";
-import {isLogin,removeSession} from "../../../../../untils/auth";
+import {isLogin,removeSession,getGroupId} from "../../../../../untils/auth";
 import { connect,useDispatch } from "react-redux";
 import "./index.scss";
 import { ContactMail } from "@material-ui/icons";
@@ -199,9 +199,19 @@ function PrimarySearchAppBar(props) {
             ) : (
                     <div>
                         <MenuItem>
-                            <Link onClick={handleMenuClose} to="/buyer/">
-                                Quản lý tài khoản
-                            </Link>
+                            {getGroupId()==1 ?
+                                (
+                                    <Link onClick={handleMenuClose} to="/buyer/">
+                                    Quản lý tài khoản
+                                    </Link>
+                                )
+                                : (
+                                    <Link onClick={handleMenuClose} to="/seller/">
+                                        Quản lý tài khoản
+                                    </Link>
+                                )
+                            }
+                            
                         </MenuItem>
                         <MenuItem>
                             <Link

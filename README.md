@@ -1,6 +1,5 @@
 ###
-theo dõi gian hàng
 mã giảm giá
-làm lại filter địa chỉ
 thống kê cho seller
-thêm vào giỏ hàng -> cho chọn loại giao hàng + chọn địa chỉ giao hàng + mã giảm giá -> chọn phương thức thanh toán
+theo dõi gian hàng
+làm lại filter địa chỉ

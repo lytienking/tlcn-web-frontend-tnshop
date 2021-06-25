@@ -9,7 +9,8 @@ export default function Books() {
         columns: [
             { title: "Tên", field: "name" },
             { title: "Mô tả ", field: "detail" },
-            { title: "Số lượng", field: "quantity" },
+            { title: "Số lượng tồn", field: "quantity" },
+            { title: "Số lượng bán", field: "quantitySold" },
             { title: "Giá", field: "price" },
         ],
         data: [
@@ -36,7 +37,8 @@ export default function Books() {
                         id:response[i]._id,
                         name: response[i].name,
                         detail: response[i].detail,
-                        quantity: response[i].quantity,
+                        quantity: response[i].quantity-response[i].quantitysold,
+                        quantitySold:response[i].quantitysold,
                         price: response[i].price 
                     }
                     console.log(result)
@@ -46,7 +48,8 @@ export default function Books() {
                     columns: [
                         { title: "Tên", field: "name" },
                         { title: "Mô tả ", field: "detail" },
-                        { title: "Số lượng", field: "quantity" },
+                        { title: "Số lượng tồn", field: "quantity" },
+                        { title: "Số lượng bán", field: "quantitySold" },
                         { title: "Giá", field: "price" },
                     ],
                     data: shirts
@@ -89,7 +92,6 @@ export default function Books() {
                                     
                                     let params ={
                                         _id:newData.id,
-                                        quantity:newData.quantity,
                                         price:newData.price,
                                         detail:newData.detail,
                                         name:newData.name

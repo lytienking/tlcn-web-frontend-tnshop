@@ -33,7 +33,7 @@ const Topbar = (props) => {
         history.push("/user/login");
     };
     const handleLogo = () => {
-        if(localStorage.getItem("groupid")===2){
+        if(localStorage.getItem("groupid")==2){
             removeSession();
         }
     }

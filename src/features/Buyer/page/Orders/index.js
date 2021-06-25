@@ -41,6 +41,10 @@ export default function Orders() {
             field: "status",
         },
         {
+            title: "Ngày đặt",
+            field: "date",
+        },
+        {
             title: "Thao tác",
             field: "action",
             render: (rowData) => {
@@ -76,6 +80,7 @@ export default function Orders() {
             cart: ["default1", "default2","default2"],
             totalPrice: 0,
             status: "default",
+            date:"defalt",
             action: "1",
             management:"quản lí"
         },
@@ -94,6 +99,7 @@ export default function Orders() {
                             
                             totalPrice: order.totalPrice+'.000đ',
                             status: renderStatus(order.status),
+                            date: order.createdAt,
                             action: order._id,
                             management:order._id,
                         };
@@ -121,6 +127,7 @@ export default function Orders() {
                             
                             totalPrice: order.totalPrice+'.000đ',
                             status: renderStatus(order.status),
+                            date: order.createdAt,
                             action: order._id,
                             management:order._id,
                         };
