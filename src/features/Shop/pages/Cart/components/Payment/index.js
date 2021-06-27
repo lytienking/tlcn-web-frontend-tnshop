@@ -90,7 +90,7 @@ function Payment(props) {
                             <label for="fname">Điện thoại</label>
                         </div>
                         <div className="col-75">
-                            <input type="number" onChange={(event)=>{setPhone(event.target.value)}}  id="fname" name="firstname" placeholder="Số điện thoại.." required/>
+                            <input type="text" onChange={(event)=>{setPhone(event.target.value)}}  id="fname" name="firstname" placeholder="Số điện thoại.." required/>
                         </div>
                     </div>
                     <div className="row">
@@ -144,6 +144,12 @@ function Payment(props) {
                     </div>
                     
                 </form>
+            </div>
+            <div className="discount-price">
+                <input type="text" placeholder="Mã giảm giá.."/>
+                <Button color="primary" block className="btn-discount">
+                    Áp dụng
+                </Button>
             </div>
             <div className="button">
                 <Button color="primary" block onClick={handleOrder}>

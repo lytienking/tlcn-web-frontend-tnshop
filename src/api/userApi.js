@@ -101,6 +101,10 @@ const userApi = {
         const url="auth/contact";
         return axiosClient.post(url,body);
     },
+    addDiscount: (body)=>{
+        const url ="auth/add-discount";
+        return axiosClient.post(url,body);
+    },
     loginGoogle: (params) => {
         const url="auth/login-google";
         return axiosClient.post(url,params);

@@ -1,6 +1,8 @@
 .payment {
     padding: 10px 20px;
     background-color: #fff;
+    display: grid;
+    grid-template-columns: 30% 70%;
     input[type=text], select, textarea{
         width: 100%;
         padding: 12px;
@@ -25,16 +27,14 @@
       }
     .container {
         border-radius: 5px;
-        background-color: #f2f2f2;
         padding: 20px;
       }
       
       .col-25 {
         float: left;
-        width: 25%;
         margin-top: 6px;
+        width: 80%;
       }
-      
       .col-75 {
         float: left;
         width: 75%;
@@ -46,21 +46,6 @@
         content: "";
         display: table;
         clear: both;
-      }
-      .discount-price{
-        padding-top: 10px;
-        display: grid;
-        grid-template-columns: 65% 35%;
-        input{
-          padding: 10px;
-        }
-        .btn-discount{
-          text-transform: uppercase;
-          background-color: #ff5e00;
-        }
-        .btn-discount:hover{
-          color: black;
-        }
       }
       /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
       @media screen and (max-width: 600px) {
@@ -85,11 +70,11 @@
         }
     }
     .button {
-        margin-top: 20px;
         height: 46px;
+        width: 80%;
         button {
             text-transform: uppercase;
-            background-color: #ff5e00;
+            background-color: rgb(1, 87, 155);
         }
         button:hover{
           color: black;
