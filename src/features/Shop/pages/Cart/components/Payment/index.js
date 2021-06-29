@@ -5,6 +5,7 @@ import {Snackbar} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { Button} from "reactstrap";
 import userApi from "../../../../../../api/userApi";
+import {getUserId} from "../../../../../../untils/auth";
 import {getListIDOrder,getPriceOrder} from "../../../../../../actions/user";
 import "./index.scss";
 
@@ -12,12 +13,39 @@ function Payment(props) {
     const history=useHistory();
     let {totalPrice: total,feeDelivery:fee} = props.cart;
     const [openAlert,setOpenAlert]=useState(false);
+    const [code,setCode]=useState("");
     const [content,setContent]=useState("");
     const [type,setType]=useState("");
     const [street,setStreet] = useState("");
     const [district,setDistrict] = useState("Quận 1");
     const [phone,setPhone]=useState(0);
     const dispatch = useDispatch();
+    const handleDiscount=()=>{
+        (async () =>{
+            try {
+                let params ={
+                    code:code,
+                    userID:getUserId()
+                }
+                const response=await userApi.applyDiscount(params);
+                if (response.success) {
+                    setOpenAlert(true);
+                    setContent(
+                        response.msg
+                    );
+                    setType("success");
+                    window.location.reload();
+                } else {
+                    setOpenAlert(true);
+                    setContent(response.msg);
+                    setType("warning");
+                }
+                
+            } catch (error) {
+                console.log(`failed remove cart api as ${error}`);
+            }   
+        })();
+    }
     const handleOrder = () => {
         (async () =>{
             try {
@@ -146,8 +174,8 @@ function Payment(props) {
                 </form>
             </div>
             <div className="discount-price">
-                <input type="text" placeholder="Mã giảm giá.."/>
-                <Button color="primary" block className="btn-discount">
+                <input type="text" onChange={(event)=>{setCode(event.target.value)}} placeholder="Mã giảm giá.."/>
+                <Button color="primary" block className="btn-discount" onClick={handleDiscount}>
                     Áp dụng
                 </Button>
             </div>

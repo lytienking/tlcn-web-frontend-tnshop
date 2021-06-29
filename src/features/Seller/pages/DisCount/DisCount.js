@@ -23,12 +23,14 @@ function DisCount(props) {
     const [price,setPrice]=useState(0);
     const [type,setType]=useState("");
     const [content,setContent]=useState("");
+    const [reload,setReload]=useState(false);
     const dispatch = useDispatch();
     let code =[];
     useEffect(() => {
         (async () => {
             try {
-                const response = await userApi.getById({ ID: getUserId()});
+                setReload(false);
+                const response = await userApi.getDiscount({ ID: getUserId()});
                 console.log("rescca",response.discount.length);
                 let codeData = [];
                 for (let i = 0; i < response.discount.length; i++) {
@@ -56,7 +58,7 @@ function DisCount(props) {
         return () => {
             // before effect and unmount
         };
-    },[]);
+    },[reload]);
     function renderStatus(id) {
         let msg;
         if (id === 0) {
@@ -92,6 +94,7 @@ function DisCount(props) {
                     const response = await userApi.addDiscount(params);
                     if (response.success) {
                         setOpenAlert(true);
+                        setReload(true);
                         setContent(
                             "Đã tạo thành công"
                         );

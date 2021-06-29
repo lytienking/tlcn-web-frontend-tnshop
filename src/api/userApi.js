@@ -9,6 +9,14 @@ const userApi = {
         const url="auth/user";
         return axiosClient.get(url,{ params });
     },
+    getDiscount: (params) => {
+        const url="auth/get-discount";
+        return axiosClient.get(url,{ params });
+    },
+    applyDiscount: (params) => {
+        const url="auth/apply-discount";
+        return axiosClient.post(url, params );
+    },
     changePassword: (userData) => {
         const url = "auth/changepassword";
         return axiosClient.post(url, userData);
