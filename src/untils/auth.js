@@ -1,61 +1,61 @@
-const ACCESS_TOKEN="accessToken";
-const REFRESH_TOKEN="refeshToken";
-const USER_ID="userId";
-const NAME="name";
-const GROUPID="groupid";
-const EMAIL="email";
+const ACCESS_TOKEN = "accessToken";
+const REFRESH_TOKEN = "refeshToken";
+const USER_ID = "userId";
+const NAME = "name";
+const GROUPID = "groupid";
+const EMAIL = "email";
 
-export const setAccessToken =(accessToken) =>{
-    localStorage.setItem(ACCESS_TOKEN,accessToken);
+export const setAccessToken = (accessToken) => {
+  localStorage.setItem(ACCESS_TOKEN, accessToken);
 };
 
 export const getAccessToken = () => {
-    return localStorage.getItem(ACCESS_TOKEN);
+  return localStorage.getItem(ACCESS_TOKEN);
 };
 
 export const getRefreshToken = () => {
-    return localStorage.getItem(REFRESH_TOKEN);
+  return localStorage.getItem(REFRESH_TOKEN);
 };
 
 export const getUserId = () => {
-    return localStorage.getItem(USER_ID);
+  return localStorage.getItem(USER_ID);
 };
 
 export const getName = () => {
-    return localStorage.getItem(NAME);
+  return localStorage.getItem(NAME);
 };
 
 export const getEmail = () => {
-    return localStorage.getItem(EMAIL);
+  return localStorage.getItem(EMAIL);
 };
 export const getGroupId = () => {
-    return localStorage.getItem(GROUPID);
+  return localStorage.getItem(GROUPID);
 };
 export const isLogin = () => {
-    if(getAccessToken()==="undefined"||!getAccessToken()){
-        return false;
-    }
-    return true;
+  if (getAccessToken() === "undefined" || !getAccessToken()) {
+    return false;
+  }
+  return true;
 };
 
-export const isRole =(groupid) => {
-    return localStorage.getItem(GROUPID)===groupid;
+export const isRole = (groupid) => {
+  return localStorage.getItem(GROUPID) === groupid;
 };
 
-export const setSession =(userName ,accessToken, groupid, email, userID) => {
-    localStorage.setItem(ACCESS_TOKEN,accessToken);
-    localStorage.setItem(GROUPID,groupid);
-    localStorage.setItem(NAME,userName);
-    localStorage.setItem(EMAIL,email);
-    localStorage.setItem(USER_ID,userID);
+export const setSession = (userName, accessToken, groupid, email, userID) => {
+  localStorage.setItem(ACCESS_TOKEN, accessToken);
+  localStorage.setItem(GROUPID, groupid);
+  localStorage.setItem(NAME, userName);
+  localStorage.setItem(EMAIL, email);
+  localStorage.setItem(USER_ID, userID);
 };
 
 export const removeSession = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(GROUPID);
-    localStorage.removeItem(NAME);
-    localStorage.removeItem(EMAIL);
-    localStorage.removeItem(USER_ID);
+  localStorage.removeItem(ACCESS_TOKEN);
+  localStorage.removeItem(GROUPID);
+  localStorage.removeItem(NAME);
+  localStorage.removeItem(EMAIL);
+  localStorage.removeItem(USER_ID);
 };
 
 // export const getNewAccessToken = async () => {

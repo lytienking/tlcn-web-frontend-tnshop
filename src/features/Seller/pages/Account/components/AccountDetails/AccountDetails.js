@@ -1,9 +1,9 @@
 import {
-    Card,
-    CardContent,
-    CardHeader,
-    Divider,
-    Snackbar,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Snackbar,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
@@ -13,47 +13,44 @@ import React, { useState } from "react";
 import UpdateAccountForm from "./components/UpdateAccountForm";
 
 const useStyles = makeStyles(() => ({
-    root: {},
+  root: {},
 }));
 
 const AccountDetails = (props) => {
-    const { className } = props;
-    const [openAlertUpdated, setOpenAlertUpdated] = useState(false);
+  const { className } = props;
+  const [openAlertUpdated, setOpenAlertUpdated] = useState(false);
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <Card className={clsx(classes.root, className)}>
-            <CardHeader
-                subheader="Người dùng có thể cập nhật thông tin của mình"
-                title="Thông tin khách hàng"
-            />
-            <Divider />
-            <CardContent>
-                <UpdateAccountForm
-                    handleSubmit={props.handleSubmit}
-                    user={props.user}
-                />
-            </CardContent>
-            <Divider />
-            <Snackbar
-                open={openAlertUpdated}
-                autoHideDuration={6000}
-                onClose={() => setOpenAlertUpdated(false)}
-            >
-                <Alert
-                    onClose={() => setOpenAlertUpdated(false)}
-                    severity="success"
-                >
-                    Đã cập nhật thành công
-                </Alert>
-            </Snackbar>
-        </Card>
-    );
+  return (
+    <Card className={clsx(classes.root, className)}>
+      <CardHeader
+        subheader="Người dùng có thể cập nhật thông tin của mình"
+        title="Thông tin khách hàng"
+      />
+      <Divider />
+      <CardContent>
+        <UpdateAccountForm
+          handleSubmit={props.handleSubmit}
+          user={props.user}
+        />
+      </CardContent>
+      <Divider />
+      <Snackbar
+        open={openAlertUpdated}
+        autoHideDuration={6000}
+        onClose={() => setOpenAlertUpdated(false)}
+      >
+        <Alert onClose={() => setOpenAlertUpdated(false)} severity="success">
+          Đã cập nhật thành công
+        </Alert>
+      </Snackbar>
+    </Card>
+  );
 };
 
 AccountDetails.propTypes = {
-    className: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default AccountDetails;

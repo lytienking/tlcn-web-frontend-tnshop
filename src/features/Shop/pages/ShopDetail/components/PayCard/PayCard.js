@@ -10,110 +10,110 @@ import { Button } from "reactstrap";
 import "./PayCard.scss";
 
 export default class PayCard extends Component {
-    static propTypes = {
-        availableQuantity: PropTypes.number,
-        price: PropTypes.number,
+  static propTypes = {
+    availableQuantity: PropTypes.number,
+    price: PropTypes.number,
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      quantity: 1,
+      size: "Chọn Size",
     };
-    constructor(props) {
-        super(props);
-        this.state = {
-            quantity: 1,
-            size:"Chọn Size"
-        };
-        this.handleAdd = this.handleAdd.bind(this);
-        this.handleSub = this.handleSub.bind(this);
-    }
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleSub = this.handleSub.bind(this);
+  }
 
-    handleSub() {
-        this.setState((state, props) => ({
-            quantity: state.quantity - 1 < 1 ? 1 : state.quantity - 1,
-        }));
-    }
-    handleAdd() {
-        this.setState((state, props) => ({
-            quantity:
-                state.quantity + 1 > props.shirt.quantity-props.shirt.quantitysold
-                    ? props.shirt.quantity-props.shirt.quantitysold
-                    : state.quantity + 1,
-        }));
-    }
-    handleChange=(event)=>{
-        this.setState({size: event.target.value});
-    }
+  handleSub() {
+    this.setState((state, props) => ({
+      quantity: state.quantity - 1 < 1 ? 1 : state.quantity - 1,
+    }));
+  }
+  handleAdd() {
+    this.setState((state, props) => ({
+      quantity:
+        state.quantity + 1 > props.shirt.quantity - props.shirt.quantitysold
+          ? props.shirt.quantity - props.shirt.quantitysold
+          : state.quantity + 1,
+    }));
+  }
+  handleChange = (event) => {
+    this.setState({ size: event.target.value });
+  };
 
-    render() {
-        const { quantity,size } = this.state;
-        const {shirt } = this.props;
-        console.log("shirt",shirt);
-        return (
-            <Card className="PayCard">
-                <CardContent className="content">
-                    <Typography
-                        className="quantity"
-                        color="textSecondary"
-                        gutterBottom
+  render() {
+    const { quantity, size } = this.state;
+    const { shirt } = this.props;
+    console.log("shirt", shirt);
+    return (
+      <Card className="PayCard">
+        <CardContent className="content">
+          <Typography className="quantity" color="textSecondary" gutterBottom>
+            Số lượng còn lại: {shirt.quantity - shirt.quantitysold}
+          </Typography>
+          <Divider />
+          <div className="action">
+            <h5 className="priceLabel">Giá bán: {shirt.price}.000 vnđ</h5>
+            <div className="wrapper">
+              <p>Số lượng mua: </p>
+              <div className="actionQuantity">
+                <div className="btn_cal" onClick={this.handleSub}>
+                  <RemoveCircleIcon />
+                </div>
+                <div className="quantity">{quantity}</div>
+                <div className="btn_cal" onClick={this.handleAdd}>
+                  <AddCircleIcon />
+                </div>
+              </div>
+              {shirt.parentcategoryID === "60507c6e89323c1f3c905655" ? (
+                <div>
+                  <p>
+                    Size:
+                    <select
+                      value={this.state.size}
+                      onChange={this.handleChange}
                     >
-                        Số lượng còn lại: {shirt.quantity-shirt.quantitysold}
-                    </Typography>
-                    <Divider />
-                    <div className="action">
-                        <h5 className="priceLabel">Giá bán: {shirt.price}.000 vnđ</h5>
-                        <div className="wrapper">
-                            <p>Số lượng mua: </p>
-                            <div className="actionQuantity">
-                                <div className="btn_cal" onClick={this.handleSub}>
-                                    <RemoveCircleIcon />
-                                </div>
-                                <div className="quantity">{quantity}</div>
-                                <div className="btn_cal" onClick={this.handleAdd}>
-                                    <AddCircleIcon />
-                                </div>
-                            </div> 
-                            {shirt.parentcategoryID==="60507c6e89323c1f3c905655" 
-                            
-                            ? (
-                               <div>
-                                    <p>
-                                        Size:
-                                        <select value={this.state.size} onChange={this.handleChange}>
-                                            <option value="XXL">XXL</option>
-                                            <option value="XL">XL</option>
-                                            <option value="L">L</option>
-                                            <option value="M">M</option>
-                                            <option value="S">S</option>
-                                        </select>
-                                    </p>
-                               </div>     
-                            )
-                            :(
-                            <div>
-                                    <p>
-                                        Size:
-                                        <select value={this.state.size} onChange={this.handleChange}>
-                                            <option value="43">43</option>
-                                            <option value="42">42</option>
-                                            <option value="41">41</option>
-                                            <option value="40">40</option>
-                                            <option value="39">39</option>
-                                            <option value="38">38</option>
-                                        </select>
-                                    </p>
-                               </div>     
-                            )
-                        }
-                                
-                            
-                        </div>
-                    </div>
+                      <option value="XXL">XXL</option>
+                      <option value="XL">XL</option>
+                      <option value="L">L</option>
+                      <option value="M">M</option>
+                      <option value="S">S</option>
+                    </select>
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    Size:
+                    <select
+                      value={this.state.size}
+                      onChange={this.handleChange}
+                    >
+                      <option value="43">43</option>
+                      <option value="42">42</option>
+                      <option value="41">41</option>
+                      <option value="40">40</option>
+                      <option value="39">39</option>
+                      <option value="38">38</option>
+                    </select>
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
 
-                    <Divider />
-                    <div className="cartd">
-                        <Button outline style={{backgroundColor:"#ff5e00"}} onClick={(e) => this.props.handleAddToCart(e,quantity,size)}>
-                            Thêm vào giỏ hàng
-                        </Button>
-                    </div>
-                </CardContent>
-            </Card>
-        );
-    }
+          <Divider />
+          <div className="cartd">
+            <Button
+              outline
+              style={{ backgroundColor: "#ff5e00" }}
+              onClick={(e) => this.props.handleAddToCart(e, quantity, size)}
+            >
+              Thêm vào giỏ hàng
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 }

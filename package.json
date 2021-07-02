@@ -51,7 +51,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,ts,tsx}\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,6 +74,7 @@
     ]
   },
   "devDependencies": {
+    "prettier": "2.3.2",
     "redux-devtools": "^3.7.0"
   },
   "description": "Project is produced for \"TLCN\" project.",
