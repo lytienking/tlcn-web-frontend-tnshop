@@ -6,7 +6,14 @@ import {
   GET_PARENTCATEGORIES,
   GET_CATEGORYBYID,
   GET_NAME_PRODUCT,
+  GET_LIST_VIEWED,
 } from "../constants/typeRedux";
+export async function getListViewed(shirts) {
+  return {
+    type: GET_LIST_VIEWED,
+    payload: shirts,
+  };
+}
 export async function getNameProducts(shirts) {
   return {
     type: GET_NAME_PRODUCT,

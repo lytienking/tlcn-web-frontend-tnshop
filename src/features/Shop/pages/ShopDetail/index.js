@@ -21,12 +21,14 @@ import { getUserId, isLogin } from "../../../../untils/auth";
 import ScrollTop from "../../../../components/ScrollTop/ScrollTop";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import "./index.scss";
+import ViewedProduct from "./components/ViewedProduct/ViewedProduct";
 class ShopDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       idShirt: "",
       shirtRelated: [],
+      shirtViewed: [],
       commentsproduct: [],
       openAlert: false,
       contentAlert: "loading",
@@ -41,21 +43,27 @@ class ShopDetail extends Component {
         let idShirt = this.props.match.params.id_shirt;
         this.setState({ idShirt });
         const response = await shirtsApi.getDetail(idShirt);
-
         let action = await getDetail(response);
         this.props.dispatch(action);
         const resByCategory = await shirtsApi.getRelatedProduct(idShirt);
-        console.log("resBy", resByCategory);
         this.setState({
           shirtRelated: [...resByCategory.data],
         });
-        console.log("res", response.comments);
         this.setState({
           commentsproduct: response.comments,
         });
         let action2 = await setCommentsProduct(this.state.commentsproduct);
         this.props.dispatch(action2);
-        console.log("cmt", this.state.commentsproduct);
+        if (getUserId()) {
+          let params = {
+            idShirt,
+            idUser: getUserId(),
+          };
+          const resViewed = await userApi.viewed(params);
+          this.setState({
+            shirtViewed: [...resViewed.viewed],
+          });
+        }
       } catch (error) {
         console.log(`failed post register as ${error}`);
       }
@@ -153,6 +161,17 @@ class ShopDetail extends Component {
                 <Col xs={12}>
                   <SimilarProduct shirts={this.state.shirtRelated} />
                 </Col>
+              )}
+            </Row>
+          </Col>
+          <Col xs={12}>
+            <Row>
+              {this.state.shirtViewed.length ? (
+                <Col xs={12}>
+                  <ViewedProduct shirts={this.state.shirtViewed} />
+                </Col>
+              ) : (
+                <h3></h3>
               )}
             </Row>
           </Col>

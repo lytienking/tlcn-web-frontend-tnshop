@@ -44,7 +44,6 @@ export default class PayCard extends Component {
   render() {
     const { quantity, size } = this.state;
     const { shirt } = this.props;
-    console.log("shirt", shirt);
     return (
       <Card className="PayCard">
         <CardContent className="content">

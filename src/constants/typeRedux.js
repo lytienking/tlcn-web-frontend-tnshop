@@ -23,3 +23,4 @@ export const GET_LISTID_ORDER = "get-listid-order";
 export const GET_PRICE_ORDER = "get-price-order";
 export const GET_LINK_MOMO = "get-link-momo";
 export const GET_NAME_PRODUCT = "get-name-product";
+export const GET_LIST_VIEWED = "get-list-view";

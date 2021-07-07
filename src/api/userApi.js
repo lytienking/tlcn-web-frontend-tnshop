@@ -1,6 +1,10 @@
 import axiosClient from "./axiosClient";
 
 const userApi = {
+  viewed: (params) => {
+    const url = "auth/viewed";
+    return axiosClient.post(url, params);
+  },
   getProductBestSold: (idSeller) => {
     const url = `seller/best-seller/${idSeller}`;
     return axiosClient.get(url);

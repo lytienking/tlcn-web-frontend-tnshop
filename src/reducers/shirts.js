@@ -8,6 +8,7 @@ import {
   GET_SHIRTS_STORE,
   GET_SHIRTS_NEW,
   GET_NAME_PRODUCT,
+  GET_LIST_VIEWED,
 } from "../constants/typeRedux";
 
 const initialState = {
@@ -20,12 +21,15 @@ const initialState = {
   shirtsStore: {},
   shirtsNew: {},
   shirtsName: [],
+  shirtsViewed: [],
 };
 
 // destruturing, spread
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GET_LIST_VIEWED:
+      return { ...state, shirtsViewed: action.payload };
     case GET_NAME_PRODUCT:
       return { ...state, shirtsName: action.payload };
     case GET_SHIRTS:
