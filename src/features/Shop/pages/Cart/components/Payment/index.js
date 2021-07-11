@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import userApi from "../../../../../../api/userApi";
 import { getUserId } from "../../../../../../untils/auth";
 import { getListIDOrder, getPriceOrder } from "../../../../../../actions/user";
+import vn from "../../../../../../vn.json";
 import "./index.scss";
 
 function Payment(props) {
@@ -17,7 +18,9 @@ function Payment(props) {
   const [content, setContent] = useState("");
   const [type, setType] = useState("");
   const [street, setStreet] = useState("");
-  const [district, setDistrict] = useState("Quận 1");
+  const [ward, setWard] = useState("");
+  const [district, setDistrict] = useState("");
+  const [city, setCity] = useState("");
   const [phone, setPhone] = useState(0);
   const dispatch = useDispatch();
   const handleDiscount = () => {
@@ -47,7 +50,8 @@ function Payment(props) {
     (async () => {
       try {
         let params = {
-          city: "Tp Hồ Chí Minh",
+          city: city,
+          ward: ward,
           street: street,
           phone: phone,
           district: district,
@@ -55,7 +59,8 @@ function Payment(props) {
         if (
           params.street !== "" &&
           params.phone !== 0 &&
-          params.district !== ""
+          params.district !== "" &&
+          params.ward !== 0
         ) {
           const response = await userApi.order(params);
           const action1 = await getListIDOrder(response.data);
@@ -87,7 +92,29 @@ function Payment(props) {
       }
     })();
   };
-
+  var vn1 = vn;
+  var districtByCityArr = vn1.filter((x) => {
+    return x.name === city;
+  });
+  var districtArr = [];
+  districtByCityArr.map((x) => {
+    x.huyen.forEach(function (item) {
+      districtArr.push(item);
+    });
+  });
+  var wardArr = [];
+  vn.forEach((x) => {
+    if (x.name === city) {
+      x.huyen.forEach((y) => {
+        if (y.name === district) {
+          y.xa.forEach((z) => {
+            wardArr.push(z.name);
+          });
+        }
+      });
+    }
+  });
+  console.log("ad", wardArr);
   return (
     <div className="payment">
       <h5 className="mb-3">Thông tin đơn hàng</h5>
@@ -124,45 +151,38 @@ function Payment(props) {
                 }}
                 id="fname"
                 name="firstname"
-                placeholder="Số điện thoại.."
                 required
               />
             </div>
           </div>
+
           <div className="row">
             <div className="col-25">
-              <label for="lname">Tên đường</label>
+              <label for="subject">Tỉnh/TP</label>
             </div>
             <div className="col-75">
-              <input
-                type="text"
-                id="lname"
+              <select
                 onChange={(event) => {
-                  setStreet(event.target.value);
+                  setCity(event.target.value);
                 }}
-                name="lastname"
-                placeholder="Tên đường.."
-                required
-              />
+                value={city}
+                id="country"
+                name="country"
+              >
+                <option aria-label="None" value="" />
+                {vn.map((x, index) => {
+                  return (
+                    <option key={index} value={x.name}>
+                      {x.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
           <div className="row">
             <div className="col-25">
-              <label for="subject">Thành phố</label>
-            </div>
-            <div className="col-75">
-              <input
-                type="text"
-                id="lname"
-                name="lastname"
-                placeholder="TP. Hồ Chí Minh"
-                disabled
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-25">
-              <label for="country">Quận</label>
+              <label for="country">Quận/Huyện</label>
             </div>
             <div className="col-75">
               <select
@@ -173,31 +193,55 @@ function Payment(props) {
                 id="country"
                 name="country"
               >
-                <option value="Quận 1">Quận 1</option>
-                <option value="Quận 2">Quận 2</option>
-                <option value="Quận 3">Quận 3</option>
-                <option value="Quận 4">Quận 4</option>
-                <option value="Quận 5">Quận 5</option>
-                <option value="Quận 6">Quận 6</option>
-                <option value="Quận 7">Quận 7</option>
-                <option value="Quận 8">Quận 8</option>
-                <option value="Quận 9">Quận 9</option>
-                <option value="Quận 10">Quận 10</option>
-                <option value="Quận 11">Quận 11</option>
-                <option value="Quận 12">Quận 12</option>
-                <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
-                <option value="Quận Thủ Đức">Quận Thủ Đức</option>
-                <option value="Quận Gò Vấp">Quận Gò Vấp</option>
-                <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
-                <option value="Quận Tân Bình">Quận Tân Bình</option>
-                <option value="Quận Tân Phú">Quận Tân Phú</option>
-                <option value="Quận Bình Tân">Quận Bình Tân</option>
-                <option value="Huyện Nhà Bè">Huyện Nhà Bè</option>
-                <option value="Huyện Hóc Môn">Huyện Hóc Môn</option>
-                <option value="Huyện Bình Chánh">Huyện Bình Chánh</option>
-                <option value="Huyện Củ Chi">Huyện Củ Chi</option>
-                <option value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+                <option aria-label="None" value="" />
+                {districtArr.map((x, index) => {
+                  return (
+                    <option key={index} value={x.name}>
+                      {x.name}
+                    </option>
+                  );
+                })}
               </select>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label for="country">Phường/Xã</label>
+            </div>
+            <div className="col-75">
+              <select
+                onChange={(event) => {
+                  setWard(event.target.value);
+                }}
+                value={ward}
+                id="country"
+                name="country"
+              >
+                <option aria-label="None" value="" />
+                {wardArr.map((x, index) => {
+                  return (
+                    <option key={index} value={x}>
+                      {x}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label for="lname">Đường/Xóm</label>
+            </div>
+            <div className="col-75">
+              <input
+                type="text"
+                id="lname"
+                onChange={(event) => {
+                  setStreet(event.target.value);
+                }}
+                name="lastname"
+                required
+              />
             </div>
           </div>
         </form>

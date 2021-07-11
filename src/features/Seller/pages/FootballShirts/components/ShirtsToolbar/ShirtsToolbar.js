@@ -76,7 +76,10 @@ class ProductsToolbar extends React.Component {
     const bodyModal = (
       <div style={{}} className="body">
         <Card className="">
-          <CardHeader subheader="Mô tả thông tin sản phẩm" title="Đăng bán sản phẩm" />
+          <CardHeader
+            subheader="Mô tả thông tin sản phẩm"
+            title="Đăng bán sản phẩm"
+          />
           <Divider />
           <CardContent>
             <AddShirtsForm />
@@ -88,8 +91,7 @@ class ProductsToolbar extends React.Component {
               justifyContent: "flex-end",
               alignItems: "center",
             }}
-          >
-          </CardActions>
+          ></CardActions>
         </Card>
       </div>
     );

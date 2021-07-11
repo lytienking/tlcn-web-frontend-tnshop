@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -23,7 +23,7 @@ import { isLogin, removeSession, getGroupId } from "../../../../../untils/auth";
 import { connect, useDispatch } from "react-redux";
 import "./index.scss";
 import { ContactMail } from "@material-ui/icons";
-import { getShirts,getNameProducts } from "../../../../../actions/shirts";
+import { getShirts, getNameProducts } from "../../../../../actions/shirts";
 import shirtsApi from "../../../../../api/shirtsApi";
 import { useHistory } from "react-router-dom";
 const CustomTextField = withStyles({

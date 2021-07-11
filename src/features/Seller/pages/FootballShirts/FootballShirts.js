@@ -93,7 +93,9 @@ export default function Books() {
                       price: newData.price,
                       detail: newData.detail,
                       name: newData.name,
-                      quantity:parseInt(oldData.quantitySold)+parseInt(newData.quantity) 
+                      quantity:
+                        parseInt(oldData.quantitySold) +
+                        parseInt(newData.quantity),
                     };
                     shirtsApi.update(params);
                     return { ...prevState, data };
