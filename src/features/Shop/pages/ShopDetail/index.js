@@ -153,8 +153,7 @@ class ShopDetail extends Component {
             </Row>
           </Col>
           <Col xs={4}>
-            {shirt.quantity-shirt.quantitysold>0 ?
-            (<PayCard handleAddToCart={this.handleAddToCart} shirt={shirt} />):(<h3>Sản phẩm tạm hết hàng</h3>)}
+            <PayCard handleAddToCart={this.handleAddToCart} shirt={shirt} />
           </Col>
           <Col xs={12}>
             <Row>

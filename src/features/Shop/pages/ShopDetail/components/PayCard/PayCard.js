@@ -103,13 +103,25 @@ export default class PayCard extends Component {
 
           <Divider />
           <div className="cartd">
-            <Button
+            {shirt.quantity - shirt.quantitysold>0 ? (
+              <Button
               outline
               style={{ backgroundColor: "#ff5e00" }}
               onClick={(e) => this.props.handleAddToCart(e, quantity, size)}
             >
               Thêm vào giỏ hàng
             </Button>
+            )
+          :(
+            <Button
+              outline
+              style={{ backgroundColor: "#ff5e00" }}
+              disabled
+            >
+              Sản phẩm đã hết hàng
+            </Button>
+          )}
+            
           </div>
         </CardContent>
       </Card>

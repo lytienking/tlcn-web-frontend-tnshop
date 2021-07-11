@@ -126,7 +126,7 @@ class AddShirtsForm extends Component {
                       category="text_thin"
                       name="name"
                       component={InputField}
-                      label="Tên áo *"
+                      label="Tên sản phẩm *"
                       type="text"
                     />
                   </Grid>

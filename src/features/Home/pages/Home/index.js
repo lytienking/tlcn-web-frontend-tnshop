@@ -41,9 +41,6 @@ const HomePage = (props) => {
         console.log("resnew", response);
         let action = await getNews(response);
         dispatch(action);
-        const responseListName = await shirtsApi.getNameProducts();
-        let action2 = await getNameProducts(responseListName);
-        dispatch(action2);
       } catch (error) {
         console.log(`failed post register as ${error}`);
       }
