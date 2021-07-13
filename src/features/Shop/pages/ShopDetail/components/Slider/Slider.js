@@ -38,7 +38,7 @@ export default class Slider extends Component {
       return { original: image, thumbnail: image };
     });
     return (
-      <div>
+      <div className="hoverimage">
         <ImageGallery items={imagesRender} />
       </div>
     );

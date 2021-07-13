@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import { Bar } from "react-chartjs-2";
 import userApi from "../../../../api/userApi";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,14 +23,29 @@ const useStyles = makeStyles({
   },
 });
 const Statistic = () => {
+  const [data,setData]=useState([]);
+  const [orderList,setOrderList]=useState([]);
   const classes = useStyles();
   useEffect(() => {
     (async () => {
-      const response = await userApi.getOrderBySeller();
-      console.log("ref", response);
+      const response = await userApi.getStatistic();
+      let res = await userApi.getOrderBySeller();
+      console.log("e",res);
+      setData(response.data)
+      setOrderList(res.orders);
     })();
   }, []);
-
+let revenueArr=[];
+let countTotal =0;
+data.map((x)=>{
+    revenueArr.push(x.total)
+    countTotal=countTotal+x.total
+})
+let count =0;
+orderList.map(()=>{
+  
+    count++;
+})
   return (
     <div>
       <Row className="row-card">
@@ -44,7 +59,7 @@ const Statistic = () => {
               >
                 Tổng doanh thu
               </Typography>
-              <Typography className={classes.money}>10.000.000đ</Typography>
+              <Typography className={classes.money}>{countTotal*1000}đ</Typography>
             </CardContent>
           </Card>
         </Col>
@@ -72,7 +87,7 @@ const Statistic = () => {
               >
                 Tổng đơn hàng
               </Typography>
-              <Typography className={classes.money}>30</Typography>
+              <Typography className={classes.money}>{count}</Typography>
             </CardContent>
           </Card>
         </Col>
@@ -97,7 +112,7 @@ const Statistic = () => {
             datasets: [
               {
                 label: "Theo tháng",
-                data: [12, 31, 5, 17, 6, 19],
+                data: revenueArr,
                 backgroundColor: ["rgba(54, 162, 235, 0.2)"],
                 borderColor: ["rgba(255, 159, 64, 1)"],
                 borderWidth: 1,

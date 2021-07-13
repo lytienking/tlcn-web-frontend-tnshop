@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import ImageGallery from "react-image-gallery";
 import { connect, useDispatch } from "react-redux";
 import { Row, Col } from "reactstrap";
@@ -9,7 +9,8 @@ import Laligalogo from "../../../../assets/images/Laligalogo.jpg";
 import Serialogo from "../../../../assets/images/Serialogo.jpg";
 import Slider from "../../../../assets/images/slide.png";
 import shirtsApi from "../../../../api/shirtsApi";
-import { getNameProducts, getNews } from "../../../../actions/shirts";
+import userApi from "../../../../api/userApi";
+import { getNews } from "../../../../actions/shirts";
 import ShirtCard from "../../../../components/ShirtCard/ShirtCard";
 import Toolbar from "@material-ui/core/Toolbar";
 import Fab from "@material-ui/core/Fab";
@@ -33,7 +34,7 @@ const HomePage = (props) => {
     },
   ];
   const dispatch = useDispatch();
-
+  const [data,setData]=useState([]);
   useEffect(() => {
     (async () => {
       try {
@@ -41,6 +42,8 @@ const HomePage = (props) => {
         console.log("resnew", response);
         let action = await getNews(response);
         dispatch(action);
+        const res= await userApi.getBestSold();
+        setData(res.data);
       } catch (error) {
         console.log(`failed post register as ${error}`);
       }
@@ -49,7 +52,10 @@ const HomePage = (props) => {
       // before effect and unmount
     };
   }, []);
-  console.log("ac", props.shirtsNew);
+  let dataArr =[];
+  data.map(x=>{
+    dataArr.push(x);
+  })
   return (
     <React.Fragment>
       <Toolbar style={{ minHeight: "0px" }} id="back-to-top-anchor" />
@@ -61,7 +67,6 @@ const HomePage = (props) => {
               autoPlay={false}
               showThumbnails={false}
             />
-            ;
           </Col>
         </Row>
         <div className="logo">
@@ -104,7 +109,6 @@ const HomePage = (props) => {
           </Row>
         </div>
         <div className="spec-product">
-          <div class="spec">
             <h3>Đề xuất cho bạn</h3>
             <div class="ser-t">
               <b></b>
@@ -113,7 +117,14 @@ const HomePage = (props) => {
               </span>
               <b class="line"></b>
             </div>
-          </div>
+            <Row xs={12} className="list-specProduct">
+            {dataArr.map &&
+              dataArr.map((item) => (
+                <Col xs={3} key={item._id}>
+                  <ShirtCard shirt={item} />
+                </Col>
+              ))}
+          </Row>
         </div>
       </div>
       <ScrollTop {...props}>

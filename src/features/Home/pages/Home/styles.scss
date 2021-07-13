@@ -48,20 +48,19 @@
     transform: rotate(45deg) translate3d(0, 0, 0);
     margin-left: 0.7em;
 }
-.spec-product{
-    padding-top: 30px;
+.spec-product {
     padding-left: 200px;
     padding-right: 200px;
-    .spec {
+    h3 {
+        padding-top: 20px;
         text-align: center;
-        margin-bottom: 3em;
-    }
-    .spec h3{
         font-family: 'Langar', cursive;
-        color:#000;
-        margin-bottom:0.5em;
+        margin-bottom: 0.5em;
+        color: #000;
     }
-    
+    .list-specProduct{
+        padding-top: 20px;
+    }
 }
 .logo{
     padding-left: 50px;
@@ -74,20 +73,3 @@
 .aHeaad {
     margin-top: 50px;
 }
-// .image-gallery {
-//     width: 40%;
-//     height: auto;
-// }
-
-// .image-gallery-slide img {
-//     width: 100%;
-//     height: auto;
-//     max-height: 80vh;
-//     object-fit: cover;
-//     overflow: hidden;
-//     object-position: center center;
-// }
-
-// .fullscreen .image-gallery-slide img {
-//     max-height: 100vh;
-// }

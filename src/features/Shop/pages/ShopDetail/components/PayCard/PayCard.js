@@ -81,7 +81,7 @@ export default class PayCard extends Component {
                   </p>
                 </div>
               ) : (
-                <div>
+                shirt.parentcategoryID === "605094599026001c60ab9919" ?(<div>
                   <p>
                     Size:
                     <select
@@ -96,7 +96,8 @@ export default class PayCard extends Component {
                       <option value="38">38</option>
                     </select>
                   </p>
-                </div>
+                </div>):(<div></div>)
+                
               )}
             </div>
           </div>

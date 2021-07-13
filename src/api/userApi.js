@@ -1,6 +1,14 @@
 import axiosClient from "./axiosClient";
 
 const userApi = {
+  getBestSold:()=>{
+    const url ="auth/get-list-bestsold";
+    return axiosClient.get(url);
+  },
+  getStatistic:()=>{
+    const url = "auth/user-revenue";
+    return axiosClient.get(url);
+  },
   viewed: (params) => {
     const url = "auth/viewed";
     return axiosClient.post(url, params);
