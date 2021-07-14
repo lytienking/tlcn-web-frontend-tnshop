@@ -14,7 +14,7 @@ class OrdersDetail extends Component {
       idOrder: "",
     };
   }
-
+  
   componentDidMount() {
     (async () => {
       let idOrder = this.props.match.params.id_orders;
@@ -32,7 +32,7 @@ class OrdersDetail extends Component {
     return (
       <div>
         {_.isEmpty(propsOrder) ? (
-          <h1>k co</h1>
+          <h1>Loading...</h1>
         ) : (
           <div>
             <InforOrder orderDetails={propsOrder} />

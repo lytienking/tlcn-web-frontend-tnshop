@@ -25,12 +25,23 @@ const useStyles = makeStyles({
 const Statistic = () => {
   const [data,setData]=useState([]);
   const [orderList,setOrderList]=useState([]);
+  const [totalDiscount,setTotalDiscount]=useState(0);
   const classes = useStyles();
   useEffect(() => {
     (async () => {
       const response = await userApi.getStatistic();
       let res = await userApi.getOrderBySeller();
-      console.log("e",res);
+      const resp =await userApi.getDiscountPrice();
+      var total =0;
+      resp.data.forEach(element => {
+        element.discount.forEach((x)=>{
+          if(x.status==1){
+            total+=x.price
+          }
+        })
+      });
+      setTotalDiscount(total);
+      console.log("e",resp);
       setData(response.data)
       setOrderList(res.orders);
     })();
@@ -73,7 +84,7 @@ orderList.map(()=>{
               >
                 Tổng chiết khấu
               </Typography>
-              <Typography className={classes.money}>10.000.000đ</Typography>
+              <Typography className={classes.money}>{totalDiscount}</Typography>
             </CardContent>
           </Card>
         </Col>

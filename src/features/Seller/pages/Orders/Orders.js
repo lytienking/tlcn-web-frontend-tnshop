@@ -113,7 +113,7 @@ function Orders() {
             return {
               customer: order.customer.name,
               cart: order.productList.map((product) => {
-                return `${product.productID.detail} - ${product.amount}- ${product.size}`;
+                return `${product.productID.name} - ${product.amount}- ${product.size}`;
               }),
               totalPrice: order.totalPrice + ".000",
               status: renderStatus(order.status),
@@ -137,7 +137,7 @@ function Orders() {
             return {
               customer: order.customer.name,
               cart: order.productList.map((product) => {
-                return `${product.productID.detail} - ${product.amount}- ${product.size}`;
+                return `${product.productID.name} - ${product.amount}- ${product.size}`;
               }),
               totalPrice: order.totalPrice + ".000",
               status: renderStatus(order.status),

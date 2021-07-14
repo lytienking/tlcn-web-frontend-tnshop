@@ -25,6 +25,10 @@ const userApi = {
     const url = "auth/get-discount";
     return axiosClient.get(url, { params });
   },
+  getDiscountPrice: () => {
+    const url = "auth/get-discount-total";
+    return axiosClient.get(url);
+  },
   applyDiscount: (params) => {
     const url = "auth/apply-discount";
     return axiosClient.post(url, params);
