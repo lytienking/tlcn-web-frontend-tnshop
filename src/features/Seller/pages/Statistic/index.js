@@ -49,7 +49,7 @@ const Statistic = () => {
 let revenueArr=[];
 let countTotal =0;
 data.map((x)=>{
-    revenueArr.push(x.total)
+    revenueArr.push(x.total*1000)
     countTotal=countTotal+x.total
 })
 let count =0;

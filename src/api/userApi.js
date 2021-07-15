@@ -1,6 +1,14 @@
 import axiosClient from "./axiosClient";
 
 const userApi = {
+  getSeller:()=>{
+    const url="auth/get-seller";
+    return axiosClient.get(url);
+  },
+  getRevenueByAdmin:(params)=>{
+    const url = "auth/admin-getrevenue";
+    return axiosClient.post(url, params);
+  },
   getBestSold:()=>{
     const url ="auth/get-list-bestsold";
     return axiosClient.get(url);

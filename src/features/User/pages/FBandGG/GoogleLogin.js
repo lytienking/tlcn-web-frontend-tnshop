@@ -16,7 +16,7 @@ class GoogleLogin extends Component {
     };
   }
   responseSuccessGoogle = async (respone) => {
-    console.log("tokenId", respone.tokenId);
+    console.log("tokenId", respone);
     const values = {
       tokenId: respone.tokenId,
       // name: respone.name,

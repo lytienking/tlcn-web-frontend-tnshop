@@ -8,6 +8,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import PeopleIcon from "@material-ui/icons/People";
 import LocalPhoneIcon from "@material-ui/icons/LocalPhone";
+import BarChartIcon from "@material-ui/icons/BarChart";
 import "./listItem.scss";
 export const mainListItems = (
   <div>
@@ -44,7 +45,19 @@ export const mainListItems = (
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Đơn hàng" />
+        <ListItemText primary="Đơn hàng" />
+      </ListItem>
+    </NavLink>
+    <NavLink
+      to="/admin/statistics"
+      className="item-sidebar"
+      activeClassName="active-menu"
+    >
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Thống kê" />
       </ListItem>
     </NavLink>
     <NavLink

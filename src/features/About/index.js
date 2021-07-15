@@ -43,7 +43,7 @@ export default function About(props) {
           <h1>Chỉ 3 bước để bán hàng trên NHT Sport</h1>
           <ImageGallery
             items={images}
-            autoPlay={false}
+            autoPlay={true}
             showThumbnails={false}
           />
         </div>

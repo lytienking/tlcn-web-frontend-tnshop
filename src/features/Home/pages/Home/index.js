@@ -64,7 +64,7 @@ const HomePage = (props) => {
           <Col xs={12} className="imageGallery">
             <ImageGallery
               items={images}
-              autoPlay={false}
+              autoPlay={true}
               showThumbnails={false}
             />
           </Col>
