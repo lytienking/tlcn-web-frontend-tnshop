@@ -11,7 +11,7 @@ import { IconButton } from "@material-ui/core";
 import io from "socket.io-client";
 import { getUserId, getName, getGroupId } from "../../../../untils/auth";
 
-const socket = io("http://localhost:3001");
+const socket = io("https://kltn-ntshop.herokuapp.com/");
 function Chat(props) {
   const [name, setName] = useState("");
 
