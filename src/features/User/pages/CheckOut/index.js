@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -15,6 +15,7 @@ import { withRouter } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import { Snackbar } from "@material-ui/core";
 import { getLinkMomo } from "../../../../actions/user";
+import {getUserId} from "../../../../untils/auth";
 class CheckOut extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +58,7 @@ class CheckOut extends Component {
     (async () => {
       try {
         let body = {
+          userId:getUserId(),
           totalPrice: total,
           listOrderId: strListID,
         };
