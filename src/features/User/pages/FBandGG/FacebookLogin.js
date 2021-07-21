@@ -56,7 +56,7 @@ class FacebookLogin extends Component {
       ? (FacebookData = <div>Hi!</div>)
       : (FacebookData = (
           <FacebookLoginBtn
-            appId="383117903543380"
+            appId="151791427050643"
             autoLoad={false}
             fields="name,email,picture"
             callback={this.responseFacebook}
