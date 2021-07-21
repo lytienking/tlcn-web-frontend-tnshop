@@ -4,6 +4,8 @@ const USER_ID = "userId";
 const NAME = "name";
 const GROUPID = "groupid";
 const EMAIL = "email";
+const PHONE ="phone";
+const ADDRESS ="address";
 
 export const setAccessToken = (accessToken) => {
   localStorage.setItem(ACCESS_TOKEN, accessToken);
@@ -31,6 +33,12 @@ export const getEmail = () => {
 export const getGroupId = () => {
   return localStorage.getItem(GROUPID);
 };
+export const getPhone = () => {
+  return localStorage.getItem(PHONE);
+};
+export const getAddress = () => {
+  return localStorage.getItem(ADDRESS);
+};
 export const isLogin = () => {
   if (getAccessToken() === "undefined" || !getAccessToken()) {
     return false;
@@ -42,12 +50,14 @@ export const isRole = (groupid) => {
   return localStorage.getItem(GROUPID) === groupid;
 };
 
-export const setSession = (userName, accessToken, groupid, email, userID) => {
+export const setSession = (userName, accessToken, groupid, email, userID,phone,address) => {
   localStorage.setItem(ACCESS_TOKEN, accessToken);
   localStorage.setItem(GROUPID, groupid);
   localStorage.setItem(NAME, userName);
   localStorage.setItem(EMAIL, email);
   localStorage.setItem(USER_ID, userID);
+  localStorage.setItem(PHONE, phone);
+  localStorage.setItem(ADDRESS, address);
 };
 
 export const removeSession = () => {

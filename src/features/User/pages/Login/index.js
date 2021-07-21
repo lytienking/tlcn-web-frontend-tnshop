@@ -31,7 +31,9 @@ class LoginPage extends React.Component {
             response.data.accessToken,
             response.data.user.groupid,
             response.data.user.email,
-            response.data.user._id
+            response.data.user._id,
+            response.data.user.phone,
+            response.data.user.address
           );
           if (response.data.user.groupid === 1) {
             this.props.history.push("/");

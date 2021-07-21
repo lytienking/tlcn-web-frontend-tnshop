@@ -11,13 +11,16 @@ import {
   GET_PRICE_ORDER,
   GET_LINK_MOMO,
 } from "../constants/typeRedux";
-
+import {getName,getPhone,getEmail,getAddress,getUserId} from "../untils/auth";
 const initialState = {
   login: {
     user: {
-      name: "Thai Ly Tien",
+      _id:getUserId(),
+      name: getName(),
       avatar: "",
-      address: "Sa Huynh, Quang Ngai",
+      address: getAddress(),
+      phone:getPhone(),
+      email:getEmail(),
     },
   },
   loginGg: {

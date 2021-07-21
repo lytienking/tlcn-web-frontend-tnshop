@@ -7,7 +7,7 @@ import { updateUser } from "../../../../actions/user";
 import userApi from "../../../../api/userApi";
 import AccountDetails from "./components/AccountDetails/AccountDetails";
 import AccountProfile from "./components/AccountProfile/AccountProfile";
-
+import {setSession,getAccessToken} from "../../../../untils/auth"
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
@@ -29,6 +29,10 @@ const Account = (props) => {
         let action = await updateUser(response);
         let resDispatch = dispatch(action);
         if (resDispatch.payload.success) {
+          console.log("ddga",resDispatch);
+          setSession(resDispatch.payload.data.user.name,getAccessToken(),resDispatch.payload.data.user.groupid,
+          resDispatch.payload.data.user.email,resDispatch.payload.data.user._id,resDispatch.payload.data.user.phone
+          ,resDispatch.payload.data.user.address)
           setOpenAlert(true);
         }
       } catch (error) {

@@ -10,20 +10,60 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
+import userApi from "../../api/userApi";
+import {isLogin} from "../../untils/auth";
 import "./ShirtCard.scss";
-
-export default class ShirtCard extends Component {
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+class ShirtCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       openAlert: false,
+      contentAlert:"",
+      typeAlert: "",
     };
-    this.handleNotSupport = this.handleNotSupport.bind(this);
+    this.addToFavorite =this.addToFavorite.bind(this);
+    this.addToCart=this.addToCart.bind(this);
+    this.detail=this.detail.bind(this);
   }
-  handleNotSupport() {
-    this.setState({ openAlert: true });
+  detail(idShirt){
+    this.props.history.push(`/shop/detail/${idShirt}`);
   }
+  addToCart(idShirt){
+    this.props.history.push(`/shop/detail/${idShirt}`);
+  }
+  addToFavorite(idShirt) {
+    if (!isLogin()) {
+      this.props.history.push("/user/login");
+      return;
+    }
+    (async () => {
+      try {
+        let response = await userApi.addToFavorite({
+          idShirt: idShirt,
+        });
 
+        if (response.success) {
+          this.setState({
+            openAlert: true,
+            contentAlert:
+              "Đã thêm thành công. Chuyển sang Quản lí tài khoản để xem chi tiết",
+            typeAlert: "success",
+          });
+        } else {
+          this.setState({
+            openAlert: true,
+            contentAlert: response.msg,
+            typeAlert: "error",
+          });
+        }
+      } catch (error) {
+        console.log(`failed post register as ${error}`);
+      }
+    })();
+  }
   render() {
     const { size, shirt, type, handleDeleteFromFavorites } = this.props;
     const isInFavorite = handleDeleteFromFavorites !== undefined;
@@ -45,7 +85,7 @@ export default class ShirtCard extends Component {
               ) : (
                 <FavoriteIcon
                   fontSize="large"
-                  onClick={this.handleNotSupport}
+                  onClick={() => this.addToFavorite(shirt._id)}
                 />
               )}
             </Link>
@@ -53,13 +93,13 @@ export default class ShirtCard extends Component {
             <Link className="icon" to="#">
               <ShoppingBasketIcon
                 fontSize="large"
-                onClick={this.handleNotSupport}
+                onClick={() => this.addToCart(shirt._id)}
               />
             </Link>
             <Link className="icon" to="#">
               <FindInPageIcon
                 fontSize="large"
-                onClick={this.handleNotSupport}
+                onClick={() => this.detail(shirt._id)}
               />
             </Link>
           </div>
@@ -107,11 +147,13 @@ export default class ShirtCard extends Component {
           <Alert
             onClose={() => this.setState({ openAlert: false })}
             severity="info"
+            typeAlert={this.state.typeAlert}
           >
-            Tính năng này chưa được hỗ trợ. Xin quý khách thông cảm.
+            {this.state.contentAlert}
           </Alert>
         </Snackbar>
       </Card>
     );
   }
 }
+export default compose(withRouter, connect(null, null))(ShirtCard);

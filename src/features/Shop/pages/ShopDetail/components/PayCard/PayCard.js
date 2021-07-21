@@ -18,7 +18,7 @@ export default class PayCard extends Component {
     super(props);
     this.state = {
       quantity: 1,
-      size: "Chọn Size",
+      size: "",
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSub = this.handleSub.bind(this);
@@ -105,10 +105,12 @@ export default class PayCard extends Component {
           <Divider />
           <div className="cartd">
             {shirt.quantity - shirt.quantitysold > 0 ? (
+            
               <Button
                 outline
                 style={{ backgroundColor: "#ff5e00" }}
-                onClick={(e) => this.props.handleAddToCart(e, quantity, size)}
+                onClick={(size==""&& shirt.parentcategoryID=="60507c6e89323c1f3c905655") ?
+                (e) => this.props.handleAddToCart(e, quantity, "XXL") : ((size==""&& shirt.parentcategoryID=="605094599026001c60ab9919")? (e) => this.props.handleAddToCart(e, quantity, "43"):(e) => this.props.handleAddToCart(e, quantity, size))}
               >
                 Thêm vào giỏ hàng
               </Button>

@@ -41,6 +41,7 @@ class RatingForm extends Component {
             type: "success",
           });
         }
+        window.location.reload();
       } catch (error) {
         console.log(`failed post register as ${error}`);
       }
