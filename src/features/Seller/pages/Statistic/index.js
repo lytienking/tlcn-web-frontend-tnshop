@@ -53,9 +53,10 @@ data.map((x)=>{
     countTotal=countTotal+x.total
 })
 let count =0;
-orderList.map(()=>{
-  
+orderList.map((x)=>{
+  if(x.status!=4){
     count++;
+  }
 })
   return (
     <div>
