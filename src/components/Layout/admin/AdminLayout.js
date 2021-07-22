@@ -152,6 +152,7 @@ export default function Dashboard(props) {
               onClick={() => {
                 removeSession();
                 history.push("/user/login");
+                window.location.reload();
               }}
             >
               <ExitToAppIcon />

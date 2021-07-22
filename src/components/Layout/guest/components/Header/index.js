@@ -159,6 +159,7 @@ function PrimarySearchAppBar(props) {
 
   const handleLogout = () => {
     removeSession();
+    window.location.reload();
   };
   const options = props.shirtsName.map((option) => {
     const firstLetter = option.name[0].toUpperCase();

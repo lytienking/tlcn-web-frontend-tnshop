@@ -30,6 +30,7 @@ const Topbar = (props) => {
   const handleLogout = () => {
     removeSession();
     history.push("/user/login");
+    window.location.reload();
   };
   const handleLogo = () => {
     if (localStorage.getItem("groupid") == 2) {
