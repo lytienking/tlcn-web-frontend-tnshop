@@ -113,7 +113,29 @@ function PrimarySearchAppBar(props) {
   let history = useHistory();
   console.log("propsheader", props);
   const dispatch = useDispatch();
-
+  const handleKeyPress = async (event) => {
+    if(event.key === 'Enter'){
+      console.log('enter press here! ',event.target.value)
+      if (event.target.value == null) {
+        console.log("values null");
+      } else {
+        const keyword = {
+          keyword: event.target.value,
+        };
+        const response = await shirtsApi.search(keyword);
+        const result = {
+          docs: response,
+          total: response.length,
+          limit: response.length,
+          page: 1,
+          pages: 1,
+        };
+        let action = await getShirts(result);
+        dispatch(action);
+        history.push("/shop/search");
+      }
+    }
+  }
   const handleSearchChange = async (event) => {
     const keyword = {
       keyword: event.target.value,
@@ -130,6 +152,7 @@ function PrimarySearchAppBar(props) {
     dispatch(action);
   };
   const handleClick = async (value) => {
+    console.log("value",value);
     if (value == null) {
       console.log("values null");
     } else {
@@ -280,6 +303,7 @@ function PrimarySearchAppBar(props) {
                       label="Tìm kiếm sản phẩm"
                       variant="outlined"
                       onChange={handleSearchChange}
+                      onKeyDown={handleKeyPress}
                       style={{
                         backgroundColor: "#f0f2f5",
                         borderRadius: "50px",
@@ -289,9 +313,10 @@ function PrimarySearchAppBar(props) {
                 />
                 <IconButton
                   color="inherit"
+                  type="submit"
                   borderRadius="0px"
                   style={{ border: "none" }}
-                  onClick={handleClick(value)}
+                  onClick={()=>handleClick(value)}
                 >
                   <SearchIcon />
                 </IconButton>
