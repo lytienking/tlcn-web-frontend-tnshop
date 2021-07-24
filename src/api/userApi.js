@@ -1,6 +1,10 @@
 import axiosClient from "./axiosClient";
 
 const userApi = {
+  getBestSoldByQuarter:()=>{
+    const url="auth//get-bestsold-by-quarter";
+    return axiosClient.get(url);
+  },
   getSeller:()=>{
     const url="auth/get-seller";
     return axiosClient.get(url);

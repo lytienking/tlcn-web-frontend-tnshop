@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import "./index.scss";
 import { Col, Row } from "reactstrap";
+import BestSoldByQuarter from "./BestSoldByQuarter";
 const useStyles = makeStyles({
   root: {
     minWidth: 300,
@@ -147,6 +148,7 @@ orderList.map((x)=>{
           }}
         />
       </div>
+      <BestSoldByQuarter/>
     </div>
   );
 };
