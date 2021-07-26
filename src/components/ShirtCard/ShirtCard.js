@@ -108,7 +108,7 @@ class ShirtCard extends Component {
             image={shirt.images[0]}
             title="Contemplative Reptile"
           >
-            {shirt.quantity - shirt.quantitysold == 0 ? (
+            {shirt.quantity - shirt.quantitysold <= 0 ? (
               <p className="sold_out">Hết hàng</p>
             ) : (
               <h1></h1>
