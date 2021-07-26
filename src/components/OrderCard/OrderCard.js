@@ -43,10 +43,10 @@ function groupByOrderStatus(id) {
   return msg;
 }
 function showRating(props) {
+  console.log("1",props.order)
   if (
     props.orderDetail.orderDetail.status === 3 &&
-    getGroupId() == 1 &&
-    props.orderDetail.orderDetail.statusRating === 0
+    getGroupId() == 1 && props.order.isRating===0
   ) {
     return (
       <div>
