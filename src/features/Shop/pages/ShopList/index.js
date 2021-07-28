@@ -9,6 +9,8 @@ import Pagination from "@material-ui/lab/Pagination";
 import categoriesApi from "../../../../api/categoriesApi";
 import shirtsApi from "../../../../api/shirtsApi";
 import { getCategoryByID } from "../../../../actions/shirts";
+import PageLoading from "../../../../components/PageLoading";
+import _ from "lodash";
 import "./index.scss";
 
 const ShopList = (props) => {
@@ -76,12 +78,16 @@ const ShopList = (props) => {
         </Col>
         <Col xs={9}>
           <Row>
-            {productByParentId.total &&
+            {_.isEmpty(productByParentId) ? (
+              <PageLoading/>
+            ) : (
+              productByParentId.total &&
               productByParentId.docs.map((shirt) => (
                 <Col xs={3} key={shirt._id} style={{ marginBottom: "25px" }}>
                   <ShirtCard shirt={shirt} />
                 </Col>
-              ))}
+              ))
+            )}
           </Row>
           <Row className="mt-5">
             <Col sm={{ size: 6, offset: 4 }}>

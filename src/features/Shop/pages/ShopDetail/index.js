@@ -22,6 +22,7 @@ import ScrollTop from "../../../../components/ScrollTop/ScrollTop";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import "./index.scss";
 import ViewedProduct from "./components/ViewedProduct/ViewedProduct";
+import PageLoading from "../../../../components/PageLoading";
 class ShopDetail extends Component {
   constructor(props) {
     super(props);
@@ -180,7 +181,7 @@ class ShopDetail extends Component {
     );
   }
   renderProgress() {
-    return <div>progress</div>;
+    return <PageLoading/>;
   }
   render() {
     let { shirtDetail: shirt } = this.props;

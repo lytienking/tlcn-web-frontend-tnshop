@@ -8,6 +8,9 @@ import Ligue1logo from "../../../../assets/images/Ligue1logo.png";
 import Laligalogo from "../../../../assets/images/Laligalogo.jpg";
 import Serialogo from "../../../../assets/images/Serialogo.jpg";
 import Slider from "../../../../assets/images/slide.png";
+import Slider1 from "../../../../assets/images/HomeSlide1.jpg";
+import Slider2 from "../../../../assets/images/HomeSlide2.png";
+import Slider3 from "../../../../assets/images/HomeSlide3.png";
 import shirtsApi from "../../../../api/shirtsApi";
 import userApi from "../../../../api/userApi";
 import { getNews } from "../../../../actions/shirts";
@@ -23,14 +26,13 @@ const HomePage = (props) => {
       original: Slider,
     },
     {
-      original:
-        "https://iweb.tatthanh.com.vn/pic/12/banner/148938_10151250754648445_1311467715_n.jpg",
+      original: Slider1,
     },
     {
-      original: "https://iweb.tatthanh.com.vn/pic/12/banner/Untitled-2.png",
+      original: Slider2,
     },
     {
-      original: "https://iweb.tatthanh.com.vn/pic/12/banner/Untitled-1.png",
+      original: Slider3,
     },
   ];
   const dispatch = useDispatch();

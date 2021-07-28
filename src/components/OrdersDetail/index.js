@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import userApi from "../../api/userApi";
 import { getOrderDetail } from "../../actions/user";
 import InforOrder from "./components/index";
+import PageLoading from "../PageLoading";
 import _ from "lodash";
 
 class OrdersDetail extends Component {
@@ -32,7 +33,7 @@ class OrdersDetail extends Component {
     return (
       <div>
         {_.isEmpty(propsOrder) ? (
-          <h1>Loading...</h1>
+          <PageLoading/>
         ) : (
           <div>
             <InforOrder orderDetails={propsOrder} />

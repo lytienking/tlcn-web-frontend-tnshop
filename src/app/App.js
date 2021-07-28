@@ -3,7 +3,7 @@ import "./App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "../theme";
-
+import PageLoading from "../components/PageLoading";
 const Home = React.lazy(() => import("../features/Home"));
 const NotFound = React.lazy(() => import("../components/NotFound"));
 const User = React.lazy(() => import("../features/User"));
@@ -16,7 +16,7 @@ const About = React.lazy(() => import("../features/About/index"));
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<PageLoading/>}>
         <BrowserRouter>
           <Switch>
             <Route component={Shop} path="/shop" />
